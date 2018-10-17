@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FixDeliveryActivity"
+    >
+
+    <TextView
+        android:id="@+id/tv_students_FD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/student"
+        android:textColor="@color/colorBlack"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/sd1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_students_FD"
+        />
+
+    <TextView
+        android:id="@+id/tv_labWork_FD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/labwork"
+        android:textColor="@color/colorBlack"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/sd1"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/sd2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_labWork_FD"
+        />
+
+    <Button
+        android:id="@+id/deliveryBtnFix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delivery"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        />
+
+
+
+</RelativeLayout>

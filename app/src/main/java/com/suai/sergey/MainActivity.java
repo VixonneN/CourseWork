@@ -1,6 +1,9 @@
 package com.suai.sergey;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         freeDeliveryButton();
     }
 
+    @NeedsPermission(Manifest.permission.INTERNET)
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
         ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cClass);
@@ -48,7 +58,14 @@ public class MainActivity extends AppCompatActivity {
         };
         classSpinner.setOnItemSelectedListener(onItemSelectedListener);
     }
-    
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //
+
+    }
+
     private void academicAdapterSpinner(){
         Spinner discipline = findViewById(R.id.s2);
         ArrayAdapter<String> disciplineAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, academicSubject);
@@ -91,4 +108,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @OnShowRationale(Manifest.permission.INTERNET)
+    void showRationaleForInternet(final PermissionRequest request){
+        showDialog("In order to proceed you need to provide storage permission");
+    }
+
+    @OnPermissionDenied(Manifest.permission.INTERNET)
+    void showDeniedLocation(){
+        showDialog("In order to proceed you need to provide storage permission");
+    }
+    void showNeverAskForLocation(){
+        showDialog("In order to proceed you need to provide storage permission");
+    }
+
+    @OnNeverAskAgain(Manifest.permission.INTERNET)
+
+    private void showDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+//                .setPositiveButton(R.string.button_allow, (dialog, button) -> request.proceed())
+//                .setNegativeButton(R.string.button_deny, (dialog, button) -> request.cancel())
+                .show();
+    }
+
 }

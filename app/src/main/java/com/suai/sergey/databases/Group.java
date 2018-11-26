@@ -1,13 +1,30 @@
 package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Group {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
-    public int number;
+    private int number;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 }

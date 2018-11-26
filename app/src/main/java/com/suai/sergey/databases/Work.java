@@ -1,18 +1,46 @@
 package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(foreignKeys = @ForeignKey(entity = Subject.class, parentColumns = "id", childColumns = "idSubject"))
 public class Work {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
-    public int idSubject;
+    private int idSubject;
 
-    public int number;
+    private int number;
 
-    public String name;
+    private String name;
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdSubject() {
+        return idSubject;
+    }
+    public void setIdSubject(int idSubject) {
+        this.idSubject = idSubject;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 }

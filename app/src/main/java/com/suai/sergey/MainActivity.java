@@ -12,13 +12,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
+import com.suai.sergey.databases.Group;
+import com.suai.sergey.databases.Student;
+import com.suai.sergey.databases.Subject;
+import com.suai.sergey.databases.Submission;
+import com.suai.sergey.databases.Work;
 
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         freeDeliveryButton();
     }
 
-    @NeedsPermission(Manifest.permission.INTERNET)
+    //выпадающие списки
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
         ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cClass);
@@ -57,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         classSpinner.setOnItemSelectedListener(onItemSelectedListener);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //
-
     }
 
     private void academicAdapterSpinner(){
@@ -86,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(onItemSelectedListener);
     }
 
+    //кнопки
     private void fixDeliveryButton(){
         final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
         fixDeliveryIntent.putStringArrayListExtra("com.suai.sergey.MainActivity", textSpinner);
@@ -109,27 +105,90 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @OnShowRationale(Manifest.permission.INTERNET)
-    void showRationaleForInternet(final PermissionRequest request){
-        showDialog("In order to proceed you need to provide storage permission");
+    //методы для заполнения таблицы
+    @NonNull
+    private Group createGroup(int number){
+        Group group = new Group();
+        group.setNumber(number);
+        return group;
     }
 
-    @OnPermissionDenied(Manifest.permission.INTERNET)
-    void showDeniedLocation(){
-        showDialog("In order to proceed you need to provide storage permission");
-    }
-    void showNeverAskForLocation(){
-        showDialog("In order to proceed you need to provide storage permission");
-    }
-
-    @OnNeverAskAgain(Manifest.permission.INTERNET)
-
-    private void showDialog(String message) {
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-//                .setPositiveButton(R.string.button_allow, (dialog, button) -> request.proceed())
-//                .setNegativeButton(R.string.button_deny, (dialog, button) -> request.cancel())
-                .show();
+    @NonNull
+    private Student createStudent(String fio){
+        Student student = new Student();
+        student.setFio(fio);
+        return student;
     }
 
+    @NonNull
+    private Work createWork(int number, String name){
+        Work work = new Work();
+        work.setName(name);
+        work.setNumber(number);
+        return work;
+    }
+
+    @NonNull
+    private Subject createSubject(String name){
+        Subject subject = new Subject();
+        subject.setName(name);
+        return subject;
+    }
+
+    @NonNull
+    private Submission creareSubmission(String date, int mark){
+        Submission submission = new Submission();
+        submission.setDate(date);
+        submission.setMark(mark);
+        return submission;
+    }
+
+    //добавление фейковых данных
+    private List<Group> getGroupList(){
+        List<Group> groupList = new ArrayList<>();
+        groupList.add(createGroup(4741));
+        groupList.add(createGroup(4742));
+        groupList.add(createGroup(4743));
+        groupList.add(createGroup(4731));
+        groupList.add(createGroup(4716));
+        return groupList;
+    }
+
+    private List<Student> getStudentList(){
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(createStudent(" "));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        return studentList;
+    }
+
+    private List<Work> getWorkList(){
+        List<Work> workList = new ArrayList<>();
+        workList.add(createWork(1, "Вводная работа"));
+        workList.add(createWork(2, "Курсовая работа"));
+        workList.add(createWork(3, "Дипломная работа"));
+        return workList;
+    }
+
+    private List<Subject> getSubjectList(){
+        List<Subject> subjectList = new ArrayList<>();
+        subjectList.add(createSubject(" "));
+        subjectList.add(createSubject("Основы программирования"));
+        subjectList.add(createSubject("Физика"));
+        subjectList.add(createSubject("Электротехника"));
+        subjectList.add(createSubject("Социология"));
+        subjectList.add(createSubject("English language"));
+        return subjectList;
+    }
+
+    private List<Submission> getSubmissionList(){
+        List<Submission> submissionList = new ArrayList<>();
+        submissionList.add(creareSubmission("21.01.18", 0));
+        submissionList.add(creareSubmission("21.01.18", 1));
+        submissionList.add(creareSubmission("21.01.18", 3));
+        submissionList.add(creareSubmission("21.01.18", 4));
+        submissionList.add(creareSubmission("21.01.18", 5));
+        return submissionList;
+    }
 }

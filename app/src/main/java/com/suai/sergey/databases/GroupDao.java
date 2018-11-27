@@ -12,13 +12,6 @@ import java.util.List;
 @Dao
 public interface GroupDao {
 
-    @Query("select number from `Group`")
+    @Query("select id, number from `Group`")
     List<Group> getNumber();
-
-    @Insert
-    void insert(Group group);
-
-    @Delete
-    void delete(Group group);
-
 }

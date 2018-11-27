@@ -2,21 +2,20 @@ package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork")) //как сделать 2 привязки в room, см. пример
+@Entity(foreignKeys = @ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork"),
+indices = @Index("idWork"))
+        //как сделать 2 привязки в room, см. пример
         //@ForeignKey(entity = Group.class, parentColumns = "id", childColumns = "idGroup"))
 public class Submission {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int idStudent;//ссылка
-
     private int idWork;//ссылка
-
     private String date;
-
     private int mark;
 
     public int getId() {

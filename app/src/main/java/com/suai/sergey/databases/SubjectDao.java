@@ -8,6 +8,6 @@ import java.util.List;
 @Dao
 public interface SubjectDao {
 
-    @Query("select name from subject")
+    @Query("select id, name from subject")
     List<Subject> getName();
 }

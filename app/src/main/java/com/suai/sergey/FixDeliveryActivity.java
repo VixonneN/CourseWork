@@ -35,7 +35,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
     private void studentSpinner(){
         Spinner studSpinner = findViewById(R.id.sd1);
-        ArrayAdapter<String> studentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, students);
+        ArrayAdapter<String> studentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, students);//
         studentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         studSpinner.setAdapter(studentAdapter);
         AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {

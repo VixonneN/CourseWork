@@ -2,13 +2,17 @@ package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
 @Dao
 public interface WorkDao {
 
-    @Query("select name from work")
+    @Query("select id, idSubject, number, name from work")
     List<Work> getName();
+
+    @Update
+    void updateAll(Student... students);
 
 }

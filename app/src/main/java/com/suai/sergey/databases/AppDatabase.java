@@ -5,20 +5,17 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {Group.class, Student.class, Subject.class, Submission.class, Work.class}, version = 1)
+//Создание базы данных
+@Database(entities = {Group.class, Student.class, Subject.class, Submission.class, Work.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase singleton;
     private static final String DATABASE_NAME = "Course.db";
 
     public abstract GroupDao groupDao();
-
     public abstract StudentDao studentDao();
-
     public abstract SubjectDao subjectDao();
-
     public abstract SubmissionDao submissionDao();
-
     public abstract WorkDao workDao();
 
     public static AppDatabase getAppDatabase(Context context) {
@@ -38,8 +35,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 }
 
-//столбец idGroup ссылается на внешний ключ,
-// но не является частью индекса.
-// Это может вызвать полное сканирование таблицы при каждом изменении родительской таблицы,
-// поэтому настоятельно рекомендуется создать индекс, покрывающий этот столбец.
-//и так с каждой таблицей, как решить - не знаю.
+//решить вопрос с 2 ссылками
+//спросить про возможности просмотреть базу данных в студии или другим способом
+//спросить насчёт дизайна выпадающих списков

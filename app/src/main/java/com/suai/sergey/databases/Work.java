@@ -2,18 +2,16 @@ package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Subject.class, parentColumns = "id", childColumns = "idSubject"))
+@Entity(foreignKeys = @ForeignKey(entity = Subject.class, parentColumns = "id", childColumns = "idSubject"), indices = @Index("idSubject"))
 public class Work {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private int idSubject;
-
     private int number;
-
     private String name;
 
     public int getId() {

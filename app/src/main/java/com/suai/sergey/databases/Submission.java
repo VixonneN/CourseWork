@@ -5,10 +5,10 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork"),
-indices = @Index("idWork"))
-        //как сделать 2 привязки в room, см. пример
-        //@ForeignKey(entity = Group.class, parentColumns = "id", childColumns = "idGroup"))
+@Entity(foreignKeys = {@ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork"),
+                       @ForeignKey(entity = Student.class, parentColumns = "id", childColumns = "idStudent")},
+        indices = {@Index("idWork"),
+                   @Index("idStudent")})
 public class Submission {
 
     @PrimaryKey(autoGenerate = true)

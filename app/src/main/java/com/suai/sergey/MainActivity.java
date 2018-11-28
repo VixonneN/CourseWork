@@ -1,9 +1,7 @@
 package com.suai.sergey;
 
-import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         academicAdapterSpinner();
         fixDeliveryButton();
         freeDeliveryButton();
+        getDB();
     }
 
     //выпадающие списки
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private Submission creareSubmission(String date, int mark){
+    private Submission createSubmission(String date, int mark){
         Submission submission = new Submission();
         submission.setDate(date);
         submission.setMark(mark);
@@ -184,11 +183,19 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Submission> getSubmissionList(){
         List<Submission> submissionList = new ArrayList<>();
-        submissionList.add(creareSubmission("21.01.18", 0));
-        submissionList.add(creareSubmission("21.01.18", 1));
-        submissionList.add(creareSubmission("21.01.18", 3));
-        submissionList.add(creareSubmission("21.01.18", 4));
-        submissionList.add(creareSubmission("21.01.18", 5));
+        submissionList.add(createSubmission("21.01.18", 0));
+        submissionList.add(createSubmission("22.01.18", 1));
+        submissionList.add(createSubmission("23.01.18", 3));
+        submissionList.add(createSubmission("24.01.18", 4));
+        submissionList.add(createSubmission("25.01.18", 5));
         return submissionList;
+    }
+
+    private void getDB(){
+        getGroupList();
+        getStudentList();
+        getSubjectList();
+        getSubmissionList();
+        getWorkList();
     }
 }

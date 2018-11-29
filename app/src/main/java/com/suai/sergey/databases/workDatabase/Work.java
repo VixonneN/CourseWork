@@ -1,9 +1,12 @@
-package com.suai.sergey.databases;
+package com.suai.sergey.databases.workDatabase;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+
+import com.suai.sergey.databases.subjectDatabase.Subject;
 
 @Entity(foreignKeys = @ForeignKey(entity = Subject.class, parentColumns = "id", childColumns = "idSubject"), indices = @Index("idSubject"))
 public class Work {
@@ -11,7 +14,9 @@ public class Work {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int idSubject;
+    @ColumnInfo(name = "number_work")
     private int number;
+    @ColumnInfo(name = "name_work")
     private String name;
 
     public int getId() {

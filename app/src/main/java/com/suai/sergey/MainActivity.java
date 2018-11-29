@@ -10,11 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.suai.sergey.databases.Group;
-import com.suai.sergey.databases.Student;
-import com.suai.sergey.databases.Subject;
-import com.suai.sergey.databases.Submission;
-import com.suai.sergey.databases.Work;
+import com.suai.sergey.databases.groupDatabase.Group;
+import com.suai.sergey.databases.studentDatabase.Student;
+import com.suai.sergey.databases.subjectDatabase.Subject;
+import com.suai.sergey.databases.submissionDatabase.Submission;
+import com.suai.sergey.databases.workDatabase.Work;
 
 import java.util.ArrayList;
 import java.util.List;

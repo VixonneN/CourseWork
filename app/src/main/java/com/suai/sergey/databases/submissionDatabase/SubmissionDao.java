@@ -1,4 +1,4 @@
-package com.suai.sergey.databases;
+package com.suai.sergey.databases.submissionDatabase;
 
 import android.arch.persistence.room.Dao;
 

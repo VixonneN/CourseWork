@@ -5,6 +5,17 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.suai.sergey.databases.groupDatabase.Group;
+import com.suai.sergey.databases.groupDatabase.GroupDao;
+import com.suai.sergey.databases.studentDatabase.Student;
+import com.suai.sergey.databases.studentDatabase.StudentDao;
+import com.suai.sergey.databases.subjectDatabase.Subject;
+import com.suai.sergey.databases.subjectDatabase.SubjectDao;
+import com.suai.sergey.databases.submissionDatabase.Submission;
+import com.suai.sergey.databases.submissionDatabase.SubmissionDao;
+import com.suai.sergey.databases.workDatabase.Work;
+import com.suai.sergey.databases.workDatabase.WorkDao;
+
 //Создание базы данных
 @Database(entities = {Group.class, Student.class, Subject.class, Submission.class, Work.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

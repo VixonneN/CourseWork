@@ -1,5 +1,6 @@
-package com.suai.sergey.databases;
+package com.suai.sergey.databases.groupDatabase;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -8,6 +9,7 @@ public class Group {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "number_group")
     private int number;
 
     public int getId() {

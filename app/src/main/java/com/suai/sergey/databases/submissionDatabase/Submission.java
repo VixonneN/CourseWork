@@ -1,9 +1,12 @@
-package com.suai.sergey.databases;
+package com.suai.sergey.databases.submissionDatabase;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+
+import com.suai.sergey.databases.workDatabase.Work;
+import com.suai.sergey.databases.studentDatabase.Student;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork"),
                        @ForeignKey(entity = Student.class, parentColumns = "id", childColumns = "idStudent")},

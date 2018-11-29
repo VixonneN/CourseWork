@@ -1,5 +1,6 @@
-package com.suai.sergey.databases;
+package com.suai.sergey.databases.subjectDatabase;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
@@ -9,6 +10,7 @@ public class Subject {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "subject_name")
     private String name;
 
     public int getId() {

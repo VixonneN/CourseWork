@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.Group;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.Student;
 import com.suai.sergey.databases.subjectDatabase.Subject;
 import com.suai.sergey.databases.submissionDatabase.Submission;
@@ -42,22 +44,28 @@ public class MainActivity extends AppCompatActivity {
     //выпадающие списки
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cClass);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(0, item);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, getGroupList());
 
-            }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
+//        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item,textSpinner); //контекст, разметка, список(String)
+
+
+        classSpinner.setAdapter(spinnerAdapter);
+
+//        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String item = (String)parent.getItemAtPosition(position);
+//                textSpinner.add(0, item);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        };
+//        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
     }
 
     private void academicAdapterSpinner(){
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(1, item);
+                textSpinner.add(0, item);
             }
 
             @Override
@@ -106,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
     //методы для заполнения таблицы
     @NonNull
-    private Group createGroup(int number){
-        Group group = new Group();
+    private NumberGroup createGroup(int number){
+        NumberGroup group = new NumberGroup();
         group.setNumber(number);
         return group;
     }
@@ -143,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //добавление фейковых данных
-    private List<Group> getGroupList(){
-        List<Group> groupList = new ArrayList<>();
+    private List<NumberGroup> getGroupList(){
+        List<NumberGroup> groupList = new ArrayList<>();
         groupList.add(createGroup(4741));
         groupList.add(createGroup(4742));
         groupList.add(createGroup(4743));

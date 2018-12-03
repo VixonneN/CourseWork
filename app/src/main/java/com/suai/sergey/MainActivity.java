@@ -5,18 +5,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import com.suai.sergey.adapters.GroupSpinnerAdapter;
-import com.suai.sergey.databases.groupDatabase.Group;
+import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
-import com.suai.sergey.databases.studentDatabase.Student;
-import com.suai.sergey.databases.subjectDatabase.Subject;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.submissionDatabase.Submission;
-import com.suai.sergey.databases.workDatabase.Work;
+import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,48 +42,15 @@ public class MainActivity extends AppCompatActivity {
     //выпадающие списки
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
-
         GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, getGroupList());
 
-//        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_spinner_item,textSpinner); //контекст, разметка, список(String)
-
-
         classSpinner.setAdapter(spinnerAdapter);
-
-//        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = (String)parent.getItemAtPosition(position);
-//                textSpinner.add(0, item);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        };
-//        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
-    }
+        }
 
     private void academicAdapterSpinner(){
         Spinner discipline = findViewById(R.id.s2);
-        ArrayAdapter<String> disciplineAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, academicSubject);
-        disciplineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        discipline.setAdapter(disciplineAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(0, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        discipline.setOnItemSelectedListener(onItemSelectedListener);
+        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, getSubjectList());
+        discipline.setAdapter(spinnerAdapter);
     }
 
     //кнопки
@@ -121,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
-    private Student createStudent(String fio){
-        Student student = new Student();
+    private FioStudent createStudent(String fio){
+        FioStudent student = new FioStudent();
         student.setFio(fio);
         return student;
     }
 
     @NonNull
-    private Work createWork(int number, String name){
-        Work work = new Work();
+    private NameWork createWork(int number, String name){
+        NameWork work = new NameWork();
         work.setName(name);
-        work.setNumber(number);
+//        work.setNumber(number);
         return work;
     }
 
     @NonNull
-    private Subject createSubject(String name){
-        Subject subject = new Subject();
+    private SubjectName createSubject(String name){
+        SubjectName subject = new SubjectName();
         subject.setName(name);
         return subject;
     }
@@ -161,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         return groupList;
     }
 
-    private List<Student> getStudentList(){
-        List<Student> studentList = new ArrayList<>();
+    private List<FioStudent> getStudentList(){
+        List<FioStudent> studentList = new ArrayList<>();
         studentList.add(createStudent(" "));
         studentList.add(createStudent("Иванов"));
         studentList.add(createStudent("Петров"));
@@ -170,16 +135,16 @@ public class MainActivity extends AppCompatActivity {
         return studentList;
     }
 
-    private List<Work> getWorkList(){
-        List<Work> workList = new ArrayList<>();
+    private List<NameWork> getWorkList(){
+        List<NameWork> workList = new ArrayList<>();
         workList.add(createWork(1, "Вводная работа"));
         workList.add(createWork(2, "Курсовая работа"));
         workList.add(createWork(3, "Дипломная работа"));
         return workList;
     }
 
-    private List<Subject> getSubjectList(){
-        List<Subject> subjectList = new ArrayList<>();
+    private List<SubjectName> getSubjectList(){
+        List<SubjectName> subjectList = new ArrayList<>();
         subjectList.add(createSubject(" "));
         subjectList.add(createSubject("Основы программирования"));
         subjectList.add(createSubject("Физика"));

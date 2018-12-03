@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.suai.sergey.adapters.StudentSpinnerAdapter;
+
 import java.util.ArrayList;
 
 public class FixDeliveryActivity extends AppCompatActivity {
@@ -35,22 +37,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
     private void studentSpinner(){
         Spinner studSpinner = findViewById(R.id.sd1);
-        ArrayAdapter<String> studentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, students);//
-        studentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        studSpinner.setAdapter(studentAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(2, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        studSpinner.setOnItemSelectedListener(onItemSelectedListener);
+//        StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, );
 
     }
 

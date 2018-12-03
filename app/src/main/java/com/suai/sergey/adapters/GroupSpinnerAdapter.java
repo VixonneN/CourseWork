@@ -43,13 +43,9 @@ public class GroupSpinnerAdapter extends BaseAdapter {
 
         @SuppressLint("ViewHolder")
         View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-
         NumberGroup numberGroup = (NumberGroup) getItem(position);
-
         TextView textView = view.findViewById(R.id.spinner_id);
-
         textView.setText(String.valueOf(numberGroup.getNumber()));// сделать toString, крашится тут
-
         return view;
     }
 }

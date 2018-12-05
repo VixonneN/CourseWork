@@ -22,10 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String[] cClass = {" ","4741", "4742", "4743"};
-    public static String[] academicSubject = {" ","Основы программирования", "Физика", "Электротехника", "Социология", "Прикладная физическая культура", "Английский язык"};
-
-    ArrayList<String> textSpinner = new ArrayList<>();
+    ArrayList<String> textSpinner = new ArrayList<>();//?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +33,19 @@ public class MainActivity extends AppCompatActivity {
         academicAdapterSpinner();
         fixDeliveryButton();
         freeDeliveryButton();
-        getDB();
     }
 
     //выпадающие списки
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
-        GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, getGroupList());
+        GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
 
         classSpinner.setAdapter(spinnerAdapter);
         }
 
     private void academicAdapterSpinner(){
         Spinner discipline = findViewById(R.id.s2);
-        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, getSubjectList());
+        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
         discipline.setAdapter(spinnerAdapter);
     }
 
@@ -75,100 +71,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(freeDeliveryIntent);
             }
         });
-    }
-
-    //методы для заполнения таблицы
-    @NonNull
-    private NumberGroup createGroup(int number){
-        NumberGroup group = new NumberGroup();
-        group.setNumber(number);
-        return group;
-    }
-
-    @NonNull
-    private FioStudent createStudent(String fio){
-        FioStudent student = new FioStudent();
-        student.setFio(fio);
-        return student;
-    }
-
-    @NonNull
-    private NameWork createWork(int number, String name){
-        NameWork work = new NameWork();
-        work.setName(name);
-//        work.setNumber(number);
-        return work;
-    }
-
-    @NonNull
-    private SubjectName createSubject(String name){
-        SubjectName subject = new SubjectName();
-        subject.setName(name);
-        return subject;
-    }
-
-    @NonNull
-    private Submission createSubmission(String date, int mark){
-        Submission submission = new Submission();
-        submission.setDate(date);
-        submission.setMark(mark);
-        return submission;
-    }
-
-    //добавление фейковых данных
-    private List<NumberGroup> getGroupList(){
-        List<NumberGroup> groupList = new ArrayList<>();
-        groupList.add(createGroup(4741));
-        groupList.add(createGroup(4742));
-        groupList.add(createGroup(4743));
-        groupList.add(createGroup(4731));
-        groupList.add(createGroup(4716));
-        return groupList;
-    }
-
-    private List<FioStudent> getStudentList(){
-        List<FioStudent> studentList = new ArrayList<>();
-        studentList.add(createStudent(" "));
-        studentList.add(createStudent("Иванов"));
-        studentList.add(createStudent("Петров"));
-        studentList.add(createStudent("Сидоров"));
-        return studentList;
-    }
-
-    private List<NameWork> getWorkList(){
-        List<NameWork> workList = new ArrayList<>();
-        workList.add(createWork(1, "Вводная работа"));
-        workList.add(createWork(2, "Курсовая работа"));
-        workList.add(createWork(3, "Дипломная работа"));
-        return workList;
-    }
-
-    private List<SubjectName> getSubjectList(){
-        List<SubjectName> subjectList = new ArrayList<>();
-        subjectList.add(createSubject(" "));
-        subjectList.add(createSubject("Основы программирования"));
-        subjectList.add(createSubject("Физика"));
-        subjectList.add(createSubject("Электротехника"));
-        subjectList.add(createSubject("Социология"));
-        subjectList.add(createSubject("English language"));
-        return subjectList;
-    }
-
-    private List<Submission> getSubmissionList(){
-        List<Submission> submissionList = new ArrayList<>();
-        submissionList.add(createSubmission("21.01.18", 0));
-        submissionList.add(createSubmission("22.01.18", 1));
-        submissionList.add(createSubmission("23.01.18", 3));
-        submissionList.add(createSubmission("24.01.18", 4));
-        submissionList.add(createSubmission("25.01.18", 5));
-        return submissionList;
-    }
-
-    private void getDB(){
-        getGroupList();
-        getStudentList();
-        getSubjectList();
-        getSubmissionList();
-        getWorkList();
     }
 }

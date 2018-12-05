@@ -10,113 +10,53 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.suai.sergey.adapters.GroupSpinnerAdapter;
+import com.suai.sergey.adapters.StudentSpinnerAdapter;
+import com.suai.sergey.adapters.SubjectSpinnerAdapter;
+import com.suai.sergey.adapters.WorkSpinnerAdapter;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static com.suai.sergey.FixDeliveryActivity.students;
-import static com.suai.sergey.MainActivity.cClass;
-import static com.suai.sergey.MainActivity.academicSubject;
-import static com.suai.sergey.FixDeliveryActivity.labWork;
 
 public class FreeDeliveryActivity extends AppCompatActivity {
 
 //    List<String> textSpinner = new ArrayList<>();
 
-    @SuppressLint("UseSparseArrays")
-    Map<Integer, String> textSpinner = new LinkedHashMap<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_free_delivery);
-        classAdapterSpinner();
+        GroupSpinner();
         studentSpinner();
-        academicAdapterSpinner();
+        subjectSpinner();
         labWorkSpinner();
         deliveryButton();
     }
 
-    private void classAdapterSpinner(){
-        Spinner classSpinner = findViewById(R.id.sv1);
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cClass);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.put(0, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
+    private void GroupSpinner(){
+        Spinner groupSpinner = findViewById(R.id.sv1);
+        GroupSpinnerAdapter groupSpinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
+        groupSpinner.setAdapter(groupSpinnerAdapter);
     }
 
     private void studentSpinner(){
         Spinner studSpinner = findViewById(R.id.sv2);
-        ArrayAdapter<String> studentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, students);
-        studentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        studSpinner.setAdapter(studentAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.put(1, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        studSpinner.setOnItemSelectedListener(onItemSelectedListener);
-
+        StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
+        studSpinner.setAdapter(studentSpinnerAdapter);
     }
 
-    private void academicAdapterSpinner() {
+    private void subjectSpinner() {
         Spinner discipline = findViewById(R.id.sv3);
-        ArrayAdapter<String> disciplineAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, academicSubject);
-        disciplineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        discipline.setAdapter(disciplineAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.put(2, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        discipline.setOnItemSelectedListener(onItemSelectedListener);
+        SubjectSpinnerAdapter subjectSpinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
+        discipline.setAdapter(subjectSpinnerAdapter);
 
     }
 
     private void labWorkSpinner(){
-        Spinner classSpinner = findViewById(R.id.sv4);
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, labWork);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.put(3,item);
-            }
+        Spinner workSpinner = findViewById(R.id.sv4);
+        WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
+        workSpinner.setAdapter(workSpinnerAdapter);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
     }
 
     private void deliveryButton(){
@@ -124,8 +64,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         fixDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
-                makeToast(getMap);
+                makeToast("Тут должен быть ответ в базу данных :D");
 //                Toast.makeText(FreeDeliveryActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });

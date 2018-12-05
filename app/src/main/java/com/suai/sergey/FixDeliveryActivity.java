@@ -11,13 +11,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.suai.sergey.adapters.StudentSpinnerAdapter;
+import com.suai.sergey.adapters.WorkSpinnerAdapter;
 
 import java.util.ArrayList;
 
 public class FixDeliveryActivity extends AppCompatActivity {
 
-    public static String students[] = {" ", "Петров", "Иванов", "Сидоров"};
-    public static String labWork[] = {" ", "1", "2", "3"};
 
 //    Intent intent = getIntent();
 //    ArrayList<String> textSpinner = intent.getStringArrayListExtra("com.suai.sergey.FixDeliveryActivity");
@@ -37,38 +36,24 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
     private void studentSpinner(){
         Spinner studSpinner = findViewById(R.id.sd1);
-//        StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, );
+        StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
+        studSpinner.setAdapter(studentSpinnerAdapter);
 
     }
 
     private void labWorkSpinner(){
         final Spinner classSpinner = findViewById(R.id.sd2);
-        final ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, labWork);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(3, item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
-
+        WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
+        classSpinner.setAdapter(workSpinnerAdapter);
     }
 
+    //нужно изменить
     private void deliveryButton(){
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getText = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
-                makeToast(getText);
+                makeToast("Тут должен быть ответ в базу данных :D");
             }
         });
     }

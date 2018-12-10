@@ -64,7 +64,6 @@ public enum FakeDataClass {
 
     public List<FioStudent> getStudentList(){
         List<FioStudent> studentList = new ArrayList<>();
-        studentList.add(createStudent(" "));
         studentList.add(createStudent("Иванов"));
         studentList.add(createStudent("Петров"));
         studentList.add(createStudent("Сидоров"));
@@ -81,7 +80,6 @@ public enum FakeDataClass {
 
     public List<SubjectName> getSubjectList(){
         List<SubjectName> subjectList = new ArrayList<>();
-        subjectList.add(createSubject(" "));
         subjectList.add(createSubject("Основы программирования"));
         subjectList.add(createSubject("Физика"));
         subjectList.add(createSubject("Электротехника"));

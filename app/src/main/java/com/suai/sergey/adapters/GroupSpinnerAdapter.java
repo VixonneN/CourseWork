@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 

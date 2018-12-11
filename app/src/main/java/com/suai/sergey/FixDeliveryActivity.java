@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.suai.sergey.adapters.StudentSpinnerAdapter;
 import com.suai.sergey.adapters.WorkSpinnerAdapter;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 
@@ -42,8 +44,10 @@ public class FixDeliveryActivity extends AppCompatActivity {
         studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
-                textSpinner.add(2, item);
+                //String item = parent.getItemAtPosition(position).toString();
+//                String item = parent.getAdapter().getItem(position).toString();
+                FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
+                textSpinner.add(2, fioStudent.getFio());
             }
 
             @Override
@@ -61,8 +65,9 @@ public class FixDeliveryActivity extends AppCompatActivity {
         workSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
-                textSpinner.add(3, item);
+//                String item = (String)parent.getItemAtPosition(position).toString();
+                NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
+                textSpinner.add(3, nameWork.getName());
             }
 
             @Override
@@ -84,6 +89,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
             }
         });
     }
+
     private void makeToast(String text){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }

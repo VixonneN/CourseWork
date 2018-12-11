@@ -13,6 +13,7 @@ import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.subjectDatabase.Subject;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.submissionDatabase.Submission;
 import com.suai.sergey.databases.workDatabase.NameWork;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
+                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
+                String item = String.valueOf(ng.getNumber());
                 textSpinner.add(0, item);
             }
 
@@ -65,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
+//                String item = (String)parent.getItemAtPosition(position).toString();
+                SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                String item = String.valueOf(subject.getName());
                 textSpinner.add(1, item);
 
             }

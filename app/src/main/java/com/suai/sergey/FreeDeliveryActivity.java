@@ -14,6 +14,10 @@ import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.StudentSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.adapters.WorkSpinnerAdapter;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.subjectDatabase.SubjectName;
+import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -43,7 +47,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         groupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
+                NumberGroup nb = (NumberGroup) parent.getItemAtPosition(position);
+                String item = String.valueOf(nb.getNumber());
                 textSpinner.add(0, item);
             }
 
@@ -62,8 +67,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
-                textSpinner.add(1, item);
+                FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
+                textSpinner.add(1, fioStudent.getFio());
 
             }
 
@@ -82,8 +87,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
-                textSpinner.add(2, item);
+                SubjectName subjectName = (SubjectName) parent.getItemAtPosition(position);
+                textSpinner.add(2, subjectName.getName());
 
             }
 
@@ -103,8 +108,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         workSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position).toString();
-                textSpinner.add(3, item);
+                NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
+                textSpinner.add(3, nameWork.getName());
 
             }
 
@@ -124,7 +129,6 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 //                makeToast("Тут должен быть ответ в базу данных :D");
                 String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
                 makeToast(getMap);
-//                Toast.makeText(FreeDeliveryActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
     }

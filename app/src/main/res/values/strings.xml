@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Сщгкыу цщкл</string>
+    <string name="app_name">Course work</string>
     <string name="fix_delivery">Фиксированная сдача</string>
     <string name="free_delivery">Свободная сдача</string>
-    <string name="delivery">Сдача</string>
+    <string name="delivery">Работа сдана</string>
     <string name="group">Группа</string>
     <string name="discipline">Дисциплина</string>
     <string name="student">Студент</string>

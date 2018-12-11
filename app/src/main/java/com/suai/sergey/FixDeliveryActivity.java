@@ -10,12 +10,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.suai.sergey.adapters.StudentSpinnerAdapter;
+import com.suai.sergey.adapters.WorkSpinnerAdapter;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.workDatabase.NameWork;
+
 import java.util.ArrayList;
 
 public class FixDeliveryActivity extends AppCompatActivity {
 
-    public static String students[] = {" ", "Петров", "Иванов", "Сидоров"};
-    public static String labWork[] = {" ", "1", "2", "3"};
 
 //    Intent intent = getIntent();
 //    ArrayList<String> textSpinner = intent.getStringArrayListExtra("com.suai.sergey.FixDeliveryActivity");
@@ -35,56 +38,58 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
     private void studentSpinner(){
         Spinner studSpinner = findViewById(R.id.sd1);
-        ArrayAdapter<String> studentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, students);
-        studentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        studSpinner.setAdapter(studentAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
+        studSpinner.setAdapter(studentSpinnerAdapter);
+
+        studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(2, item);
+                //String item = parent.getItemAtPosition(position).toString();
+//                String item = parent.getAdapter().getItem(position).toString();
+                FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
+                textSpinner.add(2, fioStudent.getFio());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
-        studSpinner.setOnItemSelectedListener(onItemSelectedListener);
-
+        });
     }
 
     private void labWorkSpinner(){
-        final Spinner classSpinner = findViewById(R.id.sd2);
-        final ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, labWork);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        final Spinner workSpinner = findViewById(R.id.sd2);
+        WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
+        workSpinner.setAdapter(workSpinnerAdapter);
+
+        workSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
-                textSpinner.add(3, item);
+//                String item = (String)parent.getItemAtPosition(position).toString();
+                NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
+                textSpinner.add(3, nameWork.getName());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
-
+        });
     }
 
+    //нужно изменить
     private void deliveryButton(){
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getText = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
-                makeToast(getText);
+//                makeToast("Тут должен быть ответ в базу данных :D");
+                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
+                makeToast(getMap);
             }
         });
     }
+
     private void makeToast(String text){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }

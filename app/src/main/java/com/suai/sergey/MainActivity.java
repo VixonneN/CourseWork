@@ -1,22 +1,30 @@
 package com.suai.sergey;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.suai.sergey.adapters.GroupSpinnerAdapter;
+import com.suai.sergey.adapters.SubjectSpinnerAdapter;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.subjectDatabase.Subject;
+import com.suai.sergey.databases.subjectDatabase.SubjectName;
+import com.suai.sergey.databases.submissionDatabase.Submission;
+import com.suai.sergey.databases.workDatabase.NameWork;
+
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String[] cClass = {" ","4741", "4742", "4743"};
-    public static String[] academicSubject = {" ","Основы программирования", "Физика", "Электротехника", "Социология", "Прикладная физическая культура", "Английский язык"};
-
-    ArrayList<String> textSpinner = new ArrayList<>();
+    ArrayList<String> textSpinner = new ArrayList<>();//?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +37,18 @@ public class MainActivity extends AppCompatActivity {
         freeDeliveryButton();
     }
 
+    //выпадающие списки
     private void classAdapterSpinner(){
         Spinner classSpinner = findViewById(R.id.group_MA);
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cClass);
-        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(classAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
+
+        classSpinner.setAdapter(spinnerAdapter);
+
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
+                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
+                String item = String.valueOf(ng.getNumber());
                 textSpinner.add(0, item);
             }
 
@@ -45,30 +56,32 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
-        classSpinner.setOnItemSelectedListener(onItemSelectedListener);
-    }
-    
+        });
+        }
+
     private void academicAdapterSpinner(){
         Spinner discipline = findViewById(R.id.s2);
-        ArrayAdapter<String> disciplineAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, academicSubject);
-        disciplineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        discipline.setAdapter(disciplineAdapter);
-        AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
+        discipline.setAdapter(spinnerAdapter);
+
+        discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
+//                String item = (String)parent.getItemAtPosition(position).toString();
+                SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                String item = String.valueOf(subject.getName());
                 textSpinner.add(1, item);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
-        discipline.setOnItemSelectedListener(onItemSelectedListener);
+        });
     }
 
+    //кнопки
     private void fixDeliveryButton(){
         final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
         fixDeliveryIntent.putStringArrayListExtra("com.suai.sergey.MainActivity", textSpinner);

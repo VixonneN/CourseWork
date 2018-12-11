@@ -24,7 +24,6 @@
         android:layout_height="40dp"
         android:layout_below="@id/twGroup"
         android:layout_marginBottom="20dp"
-        android:autofillHints="@string/discipline"
         >
 
     </Spinner>

@@ -34,6 +34,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         studentSpinner();
         labWorkSpinner();
         deliveryButton();
+        markSpinner();
     }
 
     private void studentSpinner(){
@@ -44,8 +45,6 @@ public class FixDeliveryActivity extends AppCompatActivity {
         studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String item = parent.getItemAtPosition(position).toString();
-//                String item = parent.getAdapter().getItem(position).toString();
                 FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
                 textSpinner.add(2, fioStudent.getFio());
             }
@@ -77,6 +76,26 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
+    private void markSpinner(){
+        Spinner markSpinner = findViewById(R.id.markSpinnerFix);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks , android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        markSpinner.setAdapter(adapter);
+        markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) parent.getItemAtPosition(position);
+                textSpinner.add(4, item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
     //нужно изменить
     private void deliveryButton(){
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
@@ -84,7 +103,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                makeToast("Тут должен быть ответ в базу данных :D");
-                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
+                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " с оценкой " + textSpinner.get(4);
                 makeToast(getMap);
             }
         });

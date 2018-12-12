@@ -20,9 +20,7 @@ import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FreeDeliveryActivity extends AppCompatActivity {
 
@@ -37,6 +35,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         subjectSpinner();
         labWorkSpinner();
         deliveryButton();
+        markSpinner();
     }
 
     private void GroupSpinner(){
@@ -121,13 +120,32 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 
     }
 
+    private void markSpinner(){
+        Spinner markSpinner = findViewById(R.id.markSpinnerFree);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks , android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        markSpinner.setAdapter(adapter);
+        markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) parent.getItemAtPosition(position);
+                textSpinner.add(4, item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void deliveryButton(){
         Button fixDelivery = findViewById(R.id.deliveryBtnFree);
         fixDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                makeToast("Тут должен быть ответ в базу данных :D");
-                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3);
+                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " + textSpinner.get(4);
                 makeToast(getMap);
             }
         });

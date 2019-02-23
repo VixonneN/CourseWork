@@ -16,6 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //для работы с лямбдами
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -29,6 +35,9 @@ dependencies {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
+//    implementation 'com.jakewharton:butterknife:10.0.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.2.0'
 
     implementation "android.arch.persistence.room:runtime:1.1.1"

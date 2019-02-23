@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/twGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/group"
+        android:textColor="@color/colorBlack"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Spinner
+        android:id="@+id/group_MA"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/twGroup"
+        android:layout_marginBottom="20dp"
+        >
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tv_discipline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="@string/discipline"
+        android:layout_below="@id/group_MA"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+
+        />
+
+
+    <Spinner
+        android:id="@+id/s2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tv_discipline"
+        >
+
+    </Spinner>
+
+    <Button
+        android:id="@+id/fix_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/free_delivery"
+        android:text="@string/fix_delivery"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
+    <Button
+        android:id="@+id/free_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:text="@string/free_delivery"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
+</RelativeLayout>

@@ -8,20 +8,32 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GroupSpinnerAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private List<NumberGroup> numberGroups;
+//    private List<String> groups;
 
     public GroupSpinnerAdapter(Context context, List<NumberGroup> numberGroups) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.numberGroups = numberGroups;
+    }
+
+    private List<String> groupToString(){
+        List<String> groups = new ArrayList<>();
+        groups.add("");
+        for (NumberGroup number : numberGroups) {
+            groups.add(String.valueOf(number.getNumber()));
+        }
+        return groups;
     }
 
     @Override
@@ -49,4 +61,6 @@ public class GroupSpinnerAdapter extends BaseAdapter {
         textView.setText(String.valueOf(numberGroup.getNumber()));// сделать toString, крашится тут
         return view;
     }
+
+//    private Function<NumberGroup, String> numberGroupsToString = input -> new NumberGroup().toString();
 }

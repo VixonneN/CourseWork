@@ -1,8 +1,10 @@
 package com.suai.sergey;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,10 +22,9 @@ import java.util.ArrayList;
 public class FixDeliveryActivity extends AppCompatActivity {
 
 
-//    Intent intent = getIntent();
+    //    Intent intent = getIntent();
 //    ArrayList<String> textSpinner = intent.getStringArrayListExtra("com.suai.sergey.FixDeliveryActivity");
     ArrayList<String> textSpinner = new ArrayList<>();
-
 
 
     @Override
@@ -35,9 +36,24 @@ public class FixDeliveryActivity extends AppCompatActivity {
         labWorkSpinner();
         deliveryButton();
         markSpinner();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void studentSpinner(){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void studentSpinner() {
         Spinner studSpinner = findViewById(R.id.sd1);
         StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
         studSpinner.setAdapter(studentSpinnerAdapter);
@@ -56,7 +72,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void labWorkSpinner(){
+    private void labWorkSpinner() {
         final Spinner workSpinner = findViewById(R.id.sd2);
         WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
         workSpinner.setAdapter(workSpinnerAdapter);
@@ -76,9 +92,9 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void markSpinner(){
+    private void markSpinner() {
         Spinner markSpinner = findViewById(R.id.markSpinnerFix);
-        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks , android.R.layout.simple_spinner_item);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         markSpinner.setAdapter(adapter);
         markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,7 +113,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
 
     //нужно изменить
-    private void deliveryButton(){
+    private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +125,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void makeToast(String text){
+    private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 

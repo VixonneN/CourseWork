@@ -2,8 +2,10 @@ package com.suai.sergey;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,10 +37,26 @@ public class MainActivity extends AppCompatActivity {
         academicAdapterSpinner();
         fixDeliveryButton();
         freeDeliveryButton();
+
+        //кнопка назад
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setHomeButtonEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
     }
+    //Кнопка назад
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     //выпадающие списки
-    private void classAdapterSpinner(){
+    private void classAdapterSpinner() {
         Spinner classSpinner = findViewById(R.id.group_MA);
         GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
 
@@ -47,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
+                NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
                 String item = String.valueOf(ng.getNumber());
                 textSpinner.add(0, item);
             }
@@ -57,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        }
+    }
 
-    private void academicAdapterSpinner(){
+    private void academicAdapterSpinner() {
         Spinner discipline = findViewById(R.id.s2);
         SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
         discipline.setAdapter(spinnerAdapter);
@@ -67,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = (String)parent.getItemAtPosition(position).toString();
                 SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
                 String item = String.valueOf(subject.getName());
                 textSpinner.add(1, item);
@@ -82,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //кнопки
-    private void fixDeliveryButton(){
+    private void fixDeliveryButton() {
         final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
         fixDeliveryIntent.putStringArrayListExtra("com.suai.sergey.MainActivity", textSpinner);
         Button fixDelivery = findViewById(R.id.fix_delivery);
@@ -94,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void freeDeliveryButton(){
+    private void freeDeliveryButton() {
         final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
         Button fixDelivery = findViewById(R.id.free_delivery);
         fixDelivery.setOnClickListener(new View.OnClickListener() {

@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> textSpinner = new ArrayList<>();//?
-    private List<NumberGroup> numberGroups = new List<>();
+    private List<NumberGroup> numberGroups;
     List<String> groups;
 
     @Override
@@ -55,14 +55,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                groupToString() = (String) parent.getItemAtPosition(position);
-//                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
+                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
 //                List<String> groups = new ArrayList<>();
 //                groups.add("");
 //                for (NumberGroup number : numberGroups) {
 //                    groups.add(String.valueOf(number.getNumber()));
 //                }
-                groups = (List<String>) parent.getItemAtPosition(position);
-                String item = String.valueOf(groups);
+                String item = String.valueOf(ng);
                 textSpinner.add(0, item);
             }
 

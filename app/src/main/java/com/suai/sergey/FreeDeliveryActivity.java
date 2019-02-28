@@ -117,7 +117,6 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void markSpinner(){

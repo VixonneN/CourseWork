@@ -27,14 +27,14 @@ public class GroupSpinnerAdapter extends BaseAdapter {
         this.numberGroups = numberGroups;
     }
 
-    private List<String> groupToString(){
-        List<String> groups = new ArrayList<>();
-        groups.add("");
-        for (NumberGroup number : numberGroups) {
-            groups.add(String.valueOf(number.getNumber()));
-        }
-        return groups;
-    }
+//    private List<String> groupToString(){
+//        List<String> groups = new ArrayList<>();
+//        groups.add("");
+//        for (NumberGroup number : numberGroups) {
+//            groups.add(String.valueOf(number.getNumber()));
+//        }
+//        return groups;
+//    }
 
     @Override
     public int getCount() {
@@ -54,13 +54,18 @@ public class GroupSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        List<String> groups = new ArrayList<>();
+        groups.add("");
+        for (NumberGroup number : numberGroups) {
+            groups.add(String.valueOf(number.getNumber()));
+        }
+
         @SuppressLint("ViewHolder")
         View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-        NumberGroup numberGroup = (NumberGroup) getItem(position);
+//        NumberGroup numberGroup = (NumberGroup) getItem(position);
         TextView textView = view.findViewById(R.id.spinner_id);
-        textView.setText(String.valueOf(numberGroup.getNumber()));// сделать toString, крашится тут
+        textView.setText(String.valueOf(groups));
         return view;
     }
 
-//    private Function<NumberGroup, String> numberGroupsToString = input -> new NumberGroup().toString();
 }

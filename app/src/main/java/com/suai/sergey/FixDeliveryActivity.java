@@ -1,8 +1,10 @@
 package com.suai.sergey;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,13 +19,14 @@ import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 
+//import com.suai.sergey.MainActivity.ARRAYLISTEXTRA;
+
 public class FixDeliveryActivity extends AppCompatActivity {
 
 
-//    Intent intent = getIntent();
+    //    Intent intent = getIntent();
 //    ArrayList<String> textSpinner = intent.getStringArrayListExtra("com.suai.sergey.FixDeliveryActivity");
     ArrayList<String> textSpinner = new ArrayList<>();
-
 
 
     @Override
@@ -35,9 +38,26 @@ public class FixDeliveryActivity extends AppCompatActivity {
         labWorkSpinner();
         deliveryButton();
         markSpinner();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
-    private void studentSpinner(){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void studentSpinner() {
         Spinner studSpinner = findViewById(R.id.sd1);
         StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
         studSpinner.setAdapter(studentSpinnerAdapter);
@@ -45,8 +65,12 @@ public class FixDeliveryActivity extends AppCompatActivity {
         studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
-                textSpinner.add(2, fioStudent.getFio());
+                if (position != 0) {
+                    FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
+                    String item = String.valueOf(fioStudent.getFio());
+                    textSpinner.add(2, fioStudent.getFio());
+                    makeToast(item);
+                }
             }
 
             @Override
@@ -56,7 +80,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void labWorkSpinner(){
+    private void labWorkSpinner() {
         final Spinner workSpinner = findViewById(R.id.sd2);
         WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
         workSpinner.setAdapter(workSpinnerAdapter);
@@ -64,9 +88,12 @@ public class FixDeliveryActivity extends AppCompatActivity {
         workSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = (String)parent.getItemAtPosition(position).toString();
-                NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
-                textSpinner.add(3, nameWork.getName());
+                if (position != 0) {
+                    NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
+                    String item = String.valueOf(nameWork.getName());
+                    textSpinner.add(3, nameWork.getName());
+                    makeToast(item);
+                }
             }
 
             @Override
@@ -76,16 +103,17 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void markSpinner(){
+    private void markSpinner() {
         Spinner markSpinner = findViewById(R.id.markSpinnerFix);
-        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks , android.R.layout.simple_spinner_item);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         markSpinner.setAdapter(adapter);
         markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String) parent.getItemAtPosition(position);
-                textSpinner.add(4, item);
+//                textSpinner.add(4, item);
+                makeToast(item);
             }
 
             @Override
@@ -97,19 +125,16 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
 
     //нужно изменить
-    private void deliveryButton(){
+    private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
-        fixDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                makeToast("Тут должен быть ответ в базу данных :D");
-                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " с оценкой " + textSpinner.get(4);
-                makeToast(getMap);
-            }
+        fixDelivery.setOnClickListener(v -> {
+            makeToast("Тут должен быть ответ в базу данных :D");
+            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " с оценкой " /*+ textSpinner.get(4)*/;
+            makeToast(getMap);
         });
     }
 
-    private void makeToast(String text){
+    private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 

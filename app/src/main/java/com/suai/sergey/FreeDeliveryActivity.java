@@ -1,8 +1,9 @@
 package com.suai.sergey;
 
-import android.annotation.SuppressLint;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,24 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         labWorkSpinner();
         deliveryButton();
         markSpinner();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void GroupSpinner(){
         Spinner groupSpinner = findViewById(R.id.sv1);
@@ -46,9 +64,12 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         groupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NumberGroup nb = (NumberGroup) parent.getItemAtPosition(position);
-                String item = String.valueOf(nb.getNumber());
+                if (position != 0) {
+                    NumberGroup nb = (NumberGroup) parent.getItemAtPosition(position);
+                    String item = String.valueOf(nb.getNumber());
+                    makeToast(item);
                 textSpinner.add(0, item);
+                }
             }
 
             @Override
@@ -66,9 +87,12 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         studSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
+                if (position != 0) {
+                    FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
                 textSpinner.add(1, fioStudent.getFio());
-
+                    String item = String.valueOf(fioStudent.getFio());
+                    makeToast(item);
+                }
             }
 
             @Override
@@ -86,9 +110,12 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SubjectName subjectName = (SubjectName) parent.getItemAtPosition(position);
+                if (position != 0) {
+                    SubjectName subjectName = (SubjectName) parent.getItemAtPosition(position);
+                    String item = String.valueOf(subjectName.getName());
+                    makeToast(item);
                 textSpinner.add(2, subjectName.getName());
-
+                }
             }
 
             @Override
@@ -107,9 +134,12 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         workSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
+                if (position != 0) {
+                    NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
                 textSpinner.add(3, nameWork.getName());
-
+                    String item = String.valueOf(nameWork.getName());
+                    makeToast(item);
+                }
             }
 
             @Override
@@ -128,7 +158,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String) parent.getItemAtPosition(position);
-                textSpinner.add(4, item);
+//                textSpinner.add(4, item);
+                makeToast(item);
             }
 
             @Override
@@ -140,13 +171,10 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 
     private void deliveryButton(){
         Button fixDelivery = findViewById(R.id.deliveryBtnFree);
-        fixDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        fixDelivery.setOnClickListener(v -> {
 //                makeToast("Тут должен быть ответ в базу данных :D");
-                String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " + textSpinner.get(4);
-                makeToast(getMap);
-            }
+            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " /*+ textSpinner.get(4)*/;
+            makeToast(getMap);
         });
     }
 

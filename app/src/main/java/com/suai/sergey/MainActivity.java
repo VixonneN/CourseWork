@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.suai.sergey.adapters.GroupArrayAdapter;
 import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
@@ -21,8 +21,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> textSpinner = new ArrayList<>();//?
-    private List<NumberGroup> numberGroups;
-    List<String> groups;
+
+    public static final String ARRAYLISTEXTRA = "com.suai.sergey.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +35,8 @@ public class MainActivity extends AppCompatActivity {
         freeDeliveryButton();
     }
 
-    private List<String> listToString(){
-        List<String> groups = new ArrayList<>();
-        groups.add("");
-        for (NumberGroup number : numberGroups) {
-            groups.add(String.valueOf(number.getNumber()));
-        }
-        return groups;
-    }
-
     //выпадающие списки
-    private void classAdapterSpinner(){
+    private void classAdapterSpinner() {
         Spinner classSpinner = findViewById(R.id.group_MA);
         GroupSpinnerAdapter spinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
 
@@ -54,15 +45,12 @@ public class MainActivity extends AppCompatActivity {
         classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                groupToString() = (String) parent.getItemAtPosition(position);
-                NumberGroup ng = (NumberGroup)parent.getItemAtPosition(position);
-//                List<String> groups = new ArrayList<>();
-//                groups.add("");
-//                for (NumberGroup number : numberGroups) {
-//                    groups.add(String.valueOf(number.getNumber()));
-//                }
-                String item = String.valueOf(ng);
-                textSpinner.add(0, item);
+                if (position != 0) {
+                    NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
+                    String item = String.valueOf(ng.getNumber());
+                    textSpinner.add(0, item);
+                    makeToast(item);
+                }
             }
 
             @Override
@@ -70,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        }
+    }
 
-    private void academicAdapterSpinner(){
+    //TODO: выбирается +1 элемент, если откатывать в методе вручную, то NPE
+    private void academicAdapterSpinner() {
         Spinner discipline = findViewById(R.id.s2);
         SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
         discipline.setAdapter(spinnerAdapter);
@@ -80,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = (String)parent.getItemAtPosition(position).toString();
-                SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
-                String item = String.valueOf(subject.getName());
-                textSpinner.add(1, item);
+                if (position != 0) {
+                    SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                    String item = String.valueOf(subject.getName()); //
+                    textSpinner.add(1, item);
+                    Toast.makeText(MainActivity.this, item, Toast.LENGTH_SHORT).show();
 
+                }
             }
 
             @Override
@@ -95,16 +86,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //кнопки
-    private void fixDeliveryButton(){
+    //TODO должен быть запрос, который посылает данные, выбранные в спиннерах
+    private void fixDeliveryButton() {
         final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
-        fixDeliveryIntent.putStringArrayListExtra("com.suai.sergey.MainActivity", textSpinner);
+        fixDeliveryIntent.putStringArrayListExtra(ARRAYLISTEXTRA, textSpinner);
         Button fixDelivery = findViewById(R.id.fix_delivery);
         fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
     }
 
-    private void freeDeliveryButton(){
+    private void freeDeliveryButton() {
         final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
         Button fixDelivery = findViewById(R.id.free_delivery);
         fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
+    }
+
+    private void makeToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

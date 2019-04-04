@@ -38,9 +38,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-
         />
-
 
     <Spinner
         android:id="@+id/s2"

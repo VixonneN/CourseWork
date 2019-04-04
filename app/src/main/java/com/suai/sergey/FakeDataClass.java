@@ -14,23 +14,24 @@ import java.util.List;
 
 public enum FakeDataClass {
     INSTANCE;
+
     //методы для заполнения таблицы
     @NonNull
-    public NumberGroup createGroup(int number){
+    public NumberGroup createGroup(int number) {
         NumberGroup group = new NumberGroup();
         group.setNumber(number);
         return group;
     }
 
     @NonNull
-    public FioStudent createStudent(String fio){
+    public FioStudent createStudent(String fio) {
         FioStudent student = new FioStudent();
         student.setFio(fio);
         return student;
     }
 
     @NonNull
-    public NameWork createWork(int number, String name){
+    public NameWork createWork(int number, String name) {
         NameWork work = new NameWork();
         work.setName(name);
 //        work.setNumber(number);
@@ -38,14 +39,14 @@ public enum FakeDataClass {
     }
 
     @NonNull
-    public SubjectName createSubject(String name){
+    public SubjectName createSubject(String name) {
         SubjectName subject = new SubjectName();
         subject.setName(name);
         return subject;
     }
 
     @NonNull
-    public Submission createSubmission(String date, int mark){
+    public Submission createSubmission(String date, int mark) {
         Submission submission = new Submission();
         submission.setDate(date);
         submission.setMark(mark);
@@ -53,7 +54,7 @@ public enum FakeDataClass {
     }
 
     //добавление фейковых данных
-    public List<NumberGroup> getGroupList(){
+    public List<NumberGroup> getGroupList() {
         List<NumberGroup> groupList = new ArrayList<>();
         groupList.add(createGroup(4741));
         groupList.add(createGroup(4742));
@@ -63,7 +64,7 @@ public enum FakeDataClass {
         return groupList;
     }
 
-    public List<FioStudent> getStudentList(){
+    public List<FioStudent> getStudentList() {
         List<FioStudent> studentList = new ArrayList<>();
         studentList.add(createStudent("Иванов"));
         studentList.add(createStudent("Петров"));
@@ -71,7 +72,7 @@ public enum FakeDataClass {
         return studentList;
     }
 
-    public List<NameWork> getWorkList(){
+    public List<NameWork> getWorkList() {
         List<NameWork> workList = new ArrayList<>();
         workList.add(createWork(1, "Вводная работа"));
         workList.add(createWork(2, "Курсовая работа"));
@@ -79,7 +80,7 @@ public enum FakeDataClass {
         return workList;
     }
 
-    public List<SubjectName> getSubjectList(){
+    public List<SubjectName> getSubjectList() {
         List<SubjectName> subjectList = new ArrayList<>();
         subjectList.add(createSubject("Основы программирования"));
         subjectList.add(createSubject("Физика"));
@@ -89,7 +90,7 @@ public enum FakeDataClass {
         return subjectList;
     }
 
-    public List<Submission> getSubmissionList(){
+    public List<Submission> getSubmissionList() {
         List<Submission> submissionList = new ArrayList<>();
         submissionList.add(createSubmission("21.01.18", 0));
         submissionList.add(createSubmission("22.01.18", 1));

@@ -20,30 +20,20 @@ public class GroupSpinnerAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private List<NumberGroup> numberGroups;
-//    private List<String> groups;
 
     public GroupSpinnerAdapter(Context context, List<NumberGroup> numberGroups) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.numberGroups = numberGroups;
     }
 
-//    private List<String> groupToString(){
-//        List<String> groups = new ArrayList<>();
-//        groups.add("");
-//        for (NumberGroup number : numberGroups) {
-//            groups.add(String.valueOf(number.getNumber()));
-//        }
-//        return groups;
-//    }
-
     @Override
     public int getCount() {
-        return numberGroups.size();
+        return numberGroups.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return numberGroups.get(position);
+        return numberGroups.get(position - 1);
     }
 
     @Override
@@ -55,7 +45,7 @@ public class GroupSpinnerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         List<String> groups = new ArrayList<>();
-        groups.add("");
+        groups.add(" ");
         for (NumberGroup number : numberGroups) {
             groups.add(String.valueOf(number.getNumber()));
         }
@@ -64,8 +54,7 @@ public class GroupSpinnerAdapter extends BaseAdapter {
         View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
 //        NumberGroup numberGroup = (NumberGroup) getItem(position);
         TextView textView = view.findViewById(R.id.spinner_id);
-        textView.setText(String.valueOf(groups));
+        textView.setText(String.valueOf(groups.get(position)));
         return view;
     }
-
 }

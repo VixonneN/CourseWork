@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".FreeDeliveryActivity" />
-        <activity android:name=".FixDeliveryActivity"></activity>
+        <activity android:name=".FixDeliveryActivity" />
     </application>
 
 </manifest>

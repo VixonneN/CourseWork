@@ -9,8 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.workDatabase.NameWork;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkSpinnerAdapter extends BaseAdapter {
@@ -24,12 +26,12 @@ public class WorkSpinnerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return nameWorks.size();
+        return nameWorks.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return nameWorks.get(position);
+        return nameWorks.get(position - 1);
     }
 
     @Override
@@ -40,11 +42,18 @@ public class WorkSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        List<String> workList = new ArrayList<>();
+        workList.add(" ");
+        for (NameWork nameWork : nameWorks) {
+            workList.add(String.valueOf(nameWork.getName()));
+        }
+
+
         @SuppressLint("ViewHolder")
         View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-        NameWork nameWork = (NameWork) getItem(position);
+//        NameWork nameWork = (NameWork) getItem(position);
         TextView textView = view.findViewById(R.id.spinner_id);
-        textView.setText(nameWork.getName());
+        textView.setText(String.valueOf(workList.get(position)));
         return view;
     }
 

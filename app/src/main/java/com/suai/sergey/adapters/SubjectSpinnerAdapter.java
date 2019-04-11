@@ -1,6 +1,5 @@
 package com.suai.sergey.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
-import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 
 import java.util.ArrayList;
@@ -49,11 +47,11 @@ public class SubjectSpinnerAdapter extends BaseAdapter {
             subjectList.add(String.valueOf(subjectName.getName()));
         }
 
-        @SuppressLint("ViewHolder")
-        View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-//        SubjectName subjectName = (SubjectName) getItem(position);
-        TextView textView = view.findViewById(R.id.spinner_id);
-        textView.setText(String.valueOf(subjectList.get(position)));
-        return view;
+        if (convertView == null) {
+            View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
+            TextView textView = view.findViewById(R.id.spinner_id);
+            textView.setText(String.valueOf(subjectList.get(position)));
+        }
+        return convertView;
     }
 }

@@ -46,7 +46,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
@@ -56,7 +56,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
     }
 
 
-    private void GroupSpinner(){
+    private void GroupSpinner() {
         Spinner groupSpinner = findViewById(R.id.sv1);
         GroupSpinnerAdapter groupSpinnerAdapter = new GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.getGroupList());
         groupSpinner.setAdapter(groupSpinnerAdapter);
@@ -68,7 +68,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
                     NumberGroup nb = (NumberGroup) parent.getItemAtPosition(position);
                     String item = String.valueOf(nb.getNumber());
                     makeToast(item);
-                textSpinner.add(0, item);
+                    textSpinner.add(0, item);
                 }
             }
 
@@ -79,7 +79,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void studentSpinner(){
+    private void studentSpinner() {
         Spinner studSpinner = findViewById(R.id.sv2);
         StudentSpinnerAdapter studentSpinnerAdapter = new StudentSpinnerAdapter(this, FakeDataClass.INSTANCE.getStudentList());
         studSpinner.setAdapter(studentSpinnerAdapter);
@@ -89,7 +89,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     FioStudent fioStudent = (FioStudent) parent.getItemAtPosition(position);
-                textSpinner.add(1, fioStudent.getFio());
+                    textSpinner.add(1, fioStudent.getFio());
                     String item = String.valueOf(fioStudent.getFio());
                     makeToast(item);
                 }
@@ -114,7 +114,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
                     SubjectName subjectName = (SubjectName) parent.getItemAtPosition(position);
                     String item = String.valueOf(subjectName.getName());
                     makeToast(item);
-                textSpinner.add(2, subjectName.getName());
+                    textSpinner.add(2, subjectName.getName());
                 }
             }
 
@@ -126,7 +126,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
 
     }
 
-    private void labWorkSpinner(){
+    private void labWorkSpinner() {
         Spinner workSpinner = findViewById(R.id.sv4);
         WorkSpinnerAdapter workSpinnerAdapter = new WorkSpinnerAdapter(this, FakeDataClass.INSTANCE.getWorkList());
         workSpinner.setAdapter(workSpinnerAdapter);
@@ -136,7 +136,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     NameWork nameWork = (NameWork) parent.getItemAtPosition(position);
-                textSpinner.add(3, nameWork.getName());
+                    textSpinner.add(3, nameWork.getName());
                     String item = String.valueOf(nameWork.getName());
                     makeToast(item);
                 }
@@ -149,16 +149,19 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void markSpinner(){
+    private void markSpinner() {
         Spinner markSpinner = findViewById(R.id.markSpinnerFree);
-        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks , android.R.layout.simple_spinner_item);
+        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         markSpinner.setAdapter(adapter);
         markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String) parent.getItemAtPosition(position);
-//                textSpinner.add(4, item);
+//                String item = (String) parent.getItemAtPosition(position);
+                String item = String.valueOf(FakeDataClass.INSTANCE.addMark());
+                item = (String) parent.getItemAtPosition(position);
+                item = String.valueOf(item);
+                textSpinner.add(4, item);
                 makeToast(item);
             }
 
@@ -169,16 +172,17 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    private void deliveryButton(){
+    private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFree);
         fixDelivery.setOnClickListener(v -> {
 //                makeToast("Тут должен быть ответ в базу данных :D");
-            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " /*+ textSpinner.get(4)*/;
+            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " + textSpinner.get(4);
             makeToast(getMap);
         });
     }
 
-    private void makeToast(String text){
+    private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
+
 }

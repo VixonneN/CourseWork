@@ -99,4 +99,13 @@ public enum FakeDataClass {
         submissionList.add(createSubmission("25.01.18", 5));
         return submissionList;
     }
+
+    public List<String> addMark(){
+        List<String> marks = new ArrayList<>();
+        marks.add(0, "");
+        marks.add(1, "Не сдано");
+        marks.add(2, "Сдано");
+        return marks;
+    }
+
 }

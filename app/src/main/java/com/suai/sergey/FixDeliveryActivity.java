@@ -19,8 +19,6 @@ import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 
-//import com.suai.sergey.MainActivity.ARRAYLISTEXTRA;
-
 public class FixDeliveryActivity extends AppCompatActivity {
 
 
@@ -47,7 +45,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;

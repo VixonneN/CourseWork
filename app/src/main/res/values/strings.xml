@@ -9,16 +9,7 @@
     <string name="labwork">Лабораторная работа</string>
     <string name="mark">Оценка</string>
     <string-array name="marks">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
+        <item>Сдано</item>
+        <item>Не сдано</item>
     </string-array>
 </resources>

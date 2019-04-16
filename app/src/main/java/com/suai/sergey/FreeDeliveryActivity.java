@@ -1,5 +1,7 @@
 package com.suai.sergey;
 
+import android.annotation.SuppressLint;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +56,6 @@ public class FreeDeliveryActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     private void GroupSpinner(){
         Spinner groupSpinner = findViewById(R.id.sv1);

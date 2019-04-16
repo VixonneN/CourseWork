@@ -38,7 +38,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         labWorkSpinner();
         deliveryButton();
         markSpinner();
-
+      
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);

@@ -1,8 +1,11 @@
 package com.suai.sergey;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -33,7 +36,23 @@ public class MainActivity extends AppCompatActivity {
         academicAdapterSpinner();
         fixDeliveryButton();
         freeDeliveryButton();
+
+        //кнопка назад
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setHomeButtonEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
     }
+    //Кнопка назад
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     //выпадающие списки
     private void classAdapterSpinner() {
@@ -51,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                     textSpinner.add(0, item);
                     makeToast(item);
                 }
+                NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
+                String item = String.valueOf(ng.getNumber());
+                textSpinner.add(0, item);
             }
 
             @Override
@@ -60,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //TODO: выбирается +1 элемент, если откатывать в методе вручную, то NPE
+
     private void academicAdapterSpinner() {
         Spinner discipline = findViewById(R.id.s2);
         SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
@@ -74,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
                     String item = String.valueOf(subject.getName()); //
                     textSpinner.add(1, item);
                     Toast.makeText(MainActivity.this, item, Toast.LENGTH_SHORT).show();
+                SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                String item = String.valueOf(subject.getName());
+                textSpinner.add(1, item);
 
                 }
             }

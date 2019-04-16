@@ -14,4 +14,7 @@ public interface GroupDao {
 
     @Query("select number_group from `Group`")
     List<NumberGroup> getNumber();
+
+    @Query("select number_group, subject_name from `Group`, `Subject`")
+    List<NumberAndSubjectGroup> getRequest();
 }

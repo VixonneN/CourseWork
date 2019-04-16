@@ -9,8 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentSpinnerAdapter extends BaseAdapter {
@@ -25,12 +27,12 @@ public class StudentSpinnerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return studentList.size();
+        return studentList.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return studentList.get(position);
+        return studentList.get(position - 1);
     }
 
     @Override
@@ -40,16 +42,18 @@ public class StudentSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        List<String> stringFio = new ArrayList<>();
+        stringFio.add(" ");
+        for (FioStudent students : studentList) {
+            stringFio.add(String.valueOf(students.getFio()));
+        }
+
 
         @SuppressLint("ViewHolder")
         View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-
-        FioStudent fioStudent = (FioStudent) getItem(position);
-
+//        FioStudent fioStudent = (FioStudent) getItem(position);
         TextView textView = view.findViewById(R.id.spinner_id);
-
-        textView.setText((fioStudent.getFio()));// сделать toString, крашится тут
-
+        textView.setText((String.valueOf(stringFio.get(position))));
         return view;
     }
 }

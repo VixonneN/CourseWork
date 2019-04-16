@@ -10,15 +10,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
-import com.suai.sergey.databases.studentDatabase.FioStudent;
-import com.suai.sergey.databases.subjectDatabase.Subject;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
-import com.suai.sergey.databases.submissionDatabase.Submission;
-import com.suai.sergey.databases.workDatabase.NameWork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +24,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> textSpinner = new ArrayList<>();//?
+
+    public static final String ARRAYLISTEXTRA = "com.suai.sergey.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
         classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+                    NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
+                    String item = String.valueOf(ng.getNumber());
+                    textSpinner.add(0, item);
+                    makeToast(item);
+                }
                 NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
                 String item = String.valueOf(ng.getNumber());
                 textSpinner.add(0, item);
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void academicAdapterSpinner() {
         Spinner discipline = findViewById(R.id.s2);
         SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
@@ -85,10 +91,16 @@ public class MainActivity extends AppCompatActivity {
         discipline.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+                    SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                    String item = String.valueOf(subject.getName()); //
+                    textSpinner.add(1, item);
+                    Toast.makeText(MainActivity.this, item, Toast.LENGTH_SHORT).show();
                 SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
                 String item = String.valueOf(subject.getName());
                 textSpinner.add(1, item);
 
+                }
             }
 
             @Override
@@ -99,26 +111,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //кнопки
+    //TODO должен быть запрос, который посылает данные, выбранные в спиннерах
     private void fixDeliveryButton() {
         final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
-        fixDeliveryIntent.putStringArrayListExtra("com.suai.sergey.MainActivity", textSpinner);
+        fixDeliveryIntent.putStringArrayListExtra(ARRAYLISTEXTRA, textSpinner);
         Button fixDelivery = findViewById(R.id.fix_delivery);
-        fixDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(fixDeliveryIntent);
-            }
-        });
+        fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
     }
 
     private void freeDeliveryButton() {
         final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
         Button fixDelivery = findViewById(R.id.free_delivery);
-        fixDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(freeDeliveryIntent);
-            }
-        });
+        fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
+    }
+
+    private void makeToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }

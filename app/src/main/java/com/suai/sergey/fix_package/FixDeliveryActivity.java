@@ -1,25 +1,55 @@
-package com.suai.sergey;
+package com.suai.sergey.fix_package;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.suai.sergey.fix_package.FixDeliveryActivity;
+import com.suai.sergey.FakeDataClass;
+import com.suai.sergey.R;
+import com.suai.sergey.adapters.GroupSpinnerAdapter;
+import com.suai.sergey.adapters.SubjectSpinnerAdapter;
+import com.suai.sergey.databases.groupDatabase.NumberGroup;
+import com.suai.sergey.databases.subjectDatabase.SubjectName;
 
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class FixDeliveryActivity extends AppCompatActivity {
 
-//    public static final String ARRAYLISTEXTRA = "com.suai.sergey.MainActivity";
+    ArrayList<String> textSpinner = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fix_delivery);
+//        textSpinner = getIntent().getExtras().getStringArrayList("com.suai.sergey.MainActivity");
 
-        fixDeliveryButton();
-        freeDeliveryButton();
+        classAdapterSpinner();
+        academicAdapterSpinner();
+
+        deliveryButton();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //выпадающие списки
@@ -60,8 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
                     String item = String.valueOf(subject.getName()); //
                     textSpinner.add(1, item);
-                    Toast.makeText(MainActivity.this, item, Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(FixDeliveryActivity.this, item, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -72,22 +101,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //кнопки
-    //TODO должен быть запрос, который посылает данные, выбранные в спиннерах
-    private void fixDeliveryButton() {
-        final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
-        fixDeliveryIntent.putStringArrayListExtra(ARRAYLISTEXTRA, textSpinner);
-        Button fixDelivery = findViewById(R.id.fix_delivery);
-        fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
-    }
-
-    private void freeDeliveryButton() {
-        final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
-        Button fixDelivery = findViewById(R.id.free_delivery);
-        fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
+    //нужно изменить
+    private void deliveryButton() {
+        Button fixDelivery = findViewById(R.id.deliveryBtnFix);
+        fixDelivery.setOnClickListener(v -> {
+            makeToast("Тут должен быть ответ в базу данных :D");
+            Intent newIntent = new Intent(this, FixStudentsActivity.class);
+            startActivity(newIntent);
+        });
     }
 
     private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
+
 }

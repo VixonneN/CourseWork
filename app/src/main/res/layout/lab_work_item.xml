@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/item_numberWork"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="123"
+
+        />
+
+    <TextView
+        android:id="@+id/item_nameWork"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="нахвание лабораторной работы"
+
+        />
+    <Spinner
+        android:id="@+id/item_marks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+    <Button
+        android:id="@+id/item_buttonWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сдать"
+        />
+
+</LinearLayout>

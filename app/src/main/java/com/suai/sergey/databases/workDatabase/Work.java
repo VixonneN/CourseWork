@@ -18,6 +18,8 @@ public class Work {
     private int number;
     @ColumnInfo(name = "name_work")
     private String name;
+    @ColumnInfo(name = "max_ball")
+    private int maxMarks;
 
     public int getId() {
         return id;
@@ -45,5 +47,13 @@ public class Work {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+
+    public void setMaxMarks(int maxMarks) {
+        this.maxMarks = maxMarks;
     }
 }

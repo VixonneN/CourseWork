@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FixDeliveryActivity"
+    tools:context=".fix_package.FixDeliveryActivity"
     >
 
+
     <TextView
-        android:id="@+id/tv_students_FD"
+        android:id="@+id/twGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/student"
+        android:text="@string/group"
         android:textColor="@color/colorBlack"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -20,60 +21,35 @@
         />
 
     <Spinner
-        android:id="@+id/sd1"
+        android:id="@+id/group_MA"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/tv_students_FD"
-        android:outlineAmbientShadowColor="@color/colorGrey"
-        android:outlineSpotShadowColor="@color/colorGrey"
-        />
+        android:layout_below="@id/twGroup"
+        android:layout_marginBottom="20dp"
+        >
+
+    </Spinner>
 
     <TextView
-        android:id="@+id/tv_labWork_FD"
+        android:id="@+id/tv_discipline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/labwork"
         android:textColor="@color/colorBlack"
+        android:text="@string/discipline"
+        android:layout_below="@id/group_MA"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_below="@id/sd1"
         android:layout_marginBottom="5dp"
         />
 
     <Spinner
-        android:id="@+id/sd2"
+        android:id="@+id/s2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/tv_labWork_FD"
-        />
+        android:layout_below="@id/tv_discipline"
+        >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/sd2"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/markTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mark"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorBlack"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="5"
-            />
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/markSpinnerFix"
-            android:layout_weight="1"
-            />
-
-    </LinearLayout>
+    </Spinner>
 
 
     <Button

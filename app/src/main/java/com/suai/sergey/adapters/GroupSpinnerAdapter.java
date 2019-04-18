@@ -15,6 +15,7 @@ import java.util.List;
 
 public class GroupSpinnerAdapter extends BaseAdapter {
 
+
     private LayoutInflater layoutInflater;
     private List<NumberGroup> numberGroups;
 

@@ -1,4 +1,4 @@
-package com.suai.sergey.fix_package;
+package com.suai.sergey.fix_package.recycle_view_labWork;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +28,7 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
         return new LabWorkHolder(itemView);
     }
 
+    //Вопросы - Как работать с выпадающим списком в списке, c кнопкой, условие, при котором всё будет меняться
     @Override
     public void onBindViewHolder(@NonNull LabWorkHolder labWorkHolder, int position) {
         LabWorks labWork = labWorks.get(position);

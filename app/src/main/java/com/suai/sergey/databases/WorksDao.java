@@ -25,4 +25,7 @@ public interface WorksDao {
     @Query("select number_group from `Group`")
     List<NumberGroup> getNumber();
 
+//    @Query("select number_work from work")
+//    List<NumberGroup> getNumberGroup();
+
 }

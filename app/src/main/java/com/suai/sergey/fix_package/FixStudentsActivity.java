@@ -1,5 +1,6 @@
 package com.suai.sergey.fix_package;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suai.sergey.FakeDataClass;
@@ -16,15 +18,36 @@ import com.suai.sergey.R;
 import com.suai.sergey.adapters.StudentSpinnerAdapter;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FixStudentsActivity extends AppCompatActivity {
+
+    private List<String> textSpinner = new ArrayList<>();
+
+    private TextView numberGroup;
+    private TextView nameSubject;
+    private String number;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_students);
 
+        textSpinner = getIntent().getExtras().getStringArrayList("numberGroupAndSubject");
+
+        numberGroup = findViewById(R.id.tv_group);
+        nameSubject = findViewById(R.id.tv_discipline);
+
+        number = getIntent().getStringExtra("numberGroup");
+        name = getIntent().getStringExtra("nameSubject");
+
+        numberGroup.setText(number);
+        nameSubject.setText(name);
+
         studentSpinner();
-        fixDeliveryButton();
+//        fixDeliveryButton();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -64,10 +87,17 @@ public class FixStudentsActivity extends AppCompatActivity {
         });
     }
 
-    private void fixDeliveryButton() {
-        final Intent fixDeliveryIntent = new Intent(this, FixLabWorkActivity.class);
-        Button fixDelivery = findViewById(R.id.fix_delivery);
-        fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
+//    private void fixDeliveryButton() {
+//        final Intent fixDeliveryIntent = new Intent(this, FixLabWorkActivity.class);
+//        Button fixDelivery = findViewById(R.id.fix_delivery);
+//        fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
+//    }
+
+    public static void start(Activity activity, String number, String name){
+        Intent fixStudentIntent = new Intent(activity, FixStudentsActivity.class);
+        fixStudentIntent.putExtra("numberGroup", number);
+        fixStudentIntent.putExtra("nameSubject", name);
+        activity.startActivity(fixStudentIntent);
     }
 
 

@@ -52,7 +52,6 @@ public class Work {
     public int getMaxMarks() {
         return maxMarks;
     }
-
     public void setMaxMarks(int maxMarks) {
         this.maxMarks = maxMarks;
     }

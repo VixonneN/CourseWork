@@ -2,12 +2,12 @@ package com.suai.sergey;
 
 import android.support.annotation.NonNull;
 
-import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.submissionDatabase.Submission;
 import com.suai.sergey.databases.workDatabase.NameWork;
+import com.suai.sergey.databases.workDatabase.NumberWork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +51,18 @@ public enum FakeDataClass {
         submission.setDate(date);
         submission.setMark(mark);
         return submission;
+    }
+
+    public NumberWork createNumberWork(int numberWork){
+        NumberWork numberWork1 = new NumberWork();
+        numberWork1.setNumber(numberWork);
+        return numberWork1;
+    }
+
+    public List<NumberWork> getNumberWork(){
+        List<NumberWork> numberWorks = new ArrayList<>();
+        numberWorks.add(createNumberWork(10));
+        return numberWorks;
     }
 
     //добавление фейковых данных

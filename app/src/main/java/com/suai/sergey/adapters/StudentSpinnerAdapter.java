@@ -15,6 +15,7 @@ import java.util.List;
 
 public class StudentSpinnerAdapter extends BaseAdapter {
 
+
     private LayoutInflater layoutInflater;
     private List<FioStudent> studentList;
 

@@ -25,6 +25,8 @@ import java.util.List;
 
 public class FreeDeliveryActivity extends AppCompatActivity {
 
+
+
     List<String> textSpinner = new ArrayList<>();
 
     @Override

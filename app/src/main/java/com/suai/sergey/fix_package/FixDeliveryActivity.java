@@ -1,6 +1,5 @@
 package com.suai.sergey.fix_package;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,17 +17,16 @@ import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 
-import java.util.ArrayList;
 
 public class FixDeliveryActivity extends AppCompatActivity {
 
-    ArrayList<String> textSpinner = new ArrayList<>();
+    private String name;
+    private String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_delivery);
-//        textSpinner = getIntent().getExtras().getStringArrayList("com.suai.sergey.MainActivity");
 
         classAdapterSpinner();
         academicAdapterSpinner();
@@ -65,7 +63,8 @@ public class FixDeliveryActivity extends AppCompatActivity {
                 if (position != 0) {
                     NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
                     String item = String.valueOf(ng.getNumber());
-                    textSpinner.add(0, item);
+//                    textSpinner.add(0, item);
+                    number = item;
                     makeToast(item);
                 }
             }
@@ -89,7 +88,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
                 if (position != 0) {
                     SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
                     String item = String.valueOf(subject.getName()); //
-                    textSpinner.add(1, item);
+                    name = item;
                     Toast.makeText(FixDeliveryActivity.this, item, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -106,13 +105,15 @@ public class FixDeliveryActivity extends AppCompatActivity {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(v -> {
             makeToast("Тут должен быть ответ в базу данных :D");
-            Intent newIntent = new Intent(this, FixStudentsActivity.class);
-            startActivity(newIntent);
+            openFixStudentActivity();
         });
+    }
+
+    public void openFixStudentActivity() {
+        FixStudentsActivity.start(this, number, name);
     }
 
     private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-
 }

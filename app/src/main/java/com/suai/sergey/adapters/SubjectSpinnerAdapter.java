@@ -15,6 +15,7 @@ import java.util.List;
 
 public class SubjectSpinnerAdapter extends BaseAdapter {
 
+
     private LayoutInflater layoutInflater;
     private List<SubjectName> subjectNames;
 
@@ -47,11 +48,11 @@ public class SubjectSpinnerAdapter extends BaseAdapter {
             subjectList.add(String.valueOf(subjectName.getName()));
         }
 
-        if (convertView == null) {
-            View view = layoutInflater.inflate(R.layout.spinner_item, parent, false);
-            TextView textView = view.findViewById(R.id.spinner_id);
+//        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);
+            TextView textView = convertView.findViewById(R.id.spinner_id);
             textView.setText(String.valueOf(subjectList.get(position)));
-        }
+//        }
         return convertView;
     }
 }

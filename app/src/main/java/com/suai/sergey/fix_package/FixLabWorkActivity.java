@@ -1,5 +1,7 @@
 package com.suai.sergey.fix_package;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,11 +36,11 @@ public class FixLabWorkActivity extends AppCompatActivity {
 
     }
 
-    private void addRecycleView(){
+    private void addRecycleView() {
         RecyclerView recyclerView = findViewById(R.id.rv_lab_works);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new FixLabWorkAdapter(generateLabWork());
+        RecyclerView.Adapter adapter = new FixLabWorkAdapter(generateLabWork());//npe
         recyclerView.setAdapter(adapter);
     }
 
@@ -53,12 +55,21 @@ public class FixLabWorkActivity extends AppCompatActivity {
         }
     }
 
-    private List<LabWorks> generateLabWork(){
+    private List<LabWorks> generateLabWork() {
         List<LabWorks> labWorksList = new ArrayList<>();
-        String works = String.valueOf(nameWork.getName());
-        String numberWorks = String.valueOf(numberWork.getNumber());
+        String works = String.valueOf(nameWork.getName());//npe
+        String numberWorks = String.valueOf(numberWork.getNumber());//npe
         labWorksList.add(new LabWorks(numberWorks, works, 3, true));
         return labWorksList;
     }
+
+    public static void start(Activity activity, String numberGroup, String nameSubject, String nameStudent) {
+        Intent fixLabWork = new Intent(activity, FixLabWorkActivity.class);
+        fixLabWork.putExtra("numberGroup", numberGroup);
+        fixLabWork.putExtra("nameSubject", nameSubject);
+        fixLabWork.putExtra("nameStudent", nameStudent);
+        activity.startActivity(fixLabWork);
+    }
+
 
 }

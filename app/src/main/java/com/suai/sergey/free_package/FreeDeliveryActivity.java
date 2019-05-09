@@ -1,4 +1,4 @@
-package com.suai.sergey;
+package com.suai.sergey.free_package;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.suai.sergey.FakeDataClass;
+import com.suai.sergey.R;
 import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.StudentSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
@@ -24,8 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FreeDeliveryActivity extends AppCompatActivity {
-
-
 
     List<String> textSpinner = new ArrayList<>();
 
@@ -159,11 +159,8 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = (String) parent.getItemAtPosition(position);
-                String item = String.valueOf(FakeDataClass.INSTANCE.addMark());
-                item = (String) parent.getItemAtPosition(position);
+                String item = (String) parent.getItemAtPosition(position);
                 item = String.valueOf(item);
-                textSpinner.add(4, item);
                 makeToast(item);
             }
 
@@ -178,7 +175,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         Button fixDelivery = findViewById(R.id.deliveryBtnFree);
         fixDelivery.setOnClickListener(v -> {
 //                makeToast("Тут должен быть ответ в базу данных :D");
-            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " + textSpinner.get(4);
+            String getMap = textSpinner.get(0) + " " + textSpinner.get(1) + " " + textSpinner.get(2) + " " + textSpinner.get(3) + " c оценкой " /*+ textSpinner.get(4)*/;
             makeToast(getMap);
         });
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,29 +38,43 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/student"
+        android:text="@string/studentsData"
         android:textColor="@color/colorBlack"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_discipline" />
 
-    <Spinner
-        android:id="@+id/fix_student"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/tv_students_FD"
-        android:outlineAmbientShadowColor="@color/colorGrey"
-        android:outlineSpotShadowColor="@color/colorGrey"
-        app:layout_constraintTop_toBottomOf="@id/tv_students_FD" />
-
-    <Button
-        android:id="@+id/select_lab_work"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fix_students_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_students_FD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        android:layout_marginTop="50dp"
-        android:text="@string/select_lab_work"
-        app:layout_constraintTop_toBottomOf="@id/fix_student" />
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<Spinner-->
+        <!--android:id="@+id/fix_student"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@id/tv_students_FD"-->
+        <!--android:outlineAmbientShadowColor="@color/colorGrey"-->
+        <!--android:outlineSpotShadowColor="@color/colorGrey"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tv_students_FD" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/select_lab_work"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:text="@string/select_lab_work"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/fix_student"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"/>-->
 
 
 </android.support.constraint.ConstraintLayout>

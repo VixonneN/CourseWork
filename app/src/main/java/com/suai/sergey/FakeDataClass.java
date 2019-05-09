@@ -81,6 +81,43 @@ public enum FakeDataClass {
         studentList.add(createStudent("Иванов"));
         studentList.add(createStudent("Петров"));
         studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+        studentList.add(createStudent("Иванов"));
+        studentList.add(createStudent("Петров"));
+        studentList.add(createStudent("Сидоров"));
+
         return studentList;
     }
 

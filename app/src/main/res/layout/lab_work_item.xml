@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/item_numberWork"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="40dp"
         android:text="123"
 
@@ -15,22 +16,42 @@
 
     <TextView
         android:id="@+id/item_nameWork"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="40dp"
-        android:text="нахвание лабораторной работы"
+        android:text="нахвание лабора"
 
         />
     <Spinner
         android:id="@+id/item_marks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         />
+
     <Button
         android:id="@+id/item_buttonWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сдать"
         />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/check_bold"
+        tools:ignore="ContentDescription"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="99"
+        android:textSize="30sp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/alpha_x_circle_outline"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

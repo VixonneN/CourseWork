@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FreeDeliveryActivity"
+    tools:context=".free_package.FreeDeliveryActivity"
     android:orientation="vertical">
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/student"
+        android:text="@string/studentsData"
         android:textColor="@color/colorBlack"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

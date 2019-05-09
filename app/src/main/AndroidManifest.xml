@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FreeDeliveryActivity" />
+        <activity android:name=".free_package.FreeDeliveryActivity" />
         <activity android:name=".fix_package.FixDeliveryActivity" />
     </application>
 

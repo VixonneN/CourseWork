@@ -17,11 +17,12 @@ import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 
-
 public class FixDeliveryActivity extends AppCompatActivity {
 
     private String name;
     private String number;
+    private boolean isFlagGroup;
+    private boolean isFlagSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +35,18 @@ public class FixDeliveryActivity extends AppCompatActivity {
         deliveryButton();
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     //выпадающие списки
@@ -61,11 +60,15 @@ public class FixDeliveryActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
+                    //флаг для перехода
+                    isFlagGroup = true;
                     NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
                     String item = String.valueOf(ng.getNumber());
 //                    textSpinner.add(0, item);
                     number = item;
                     makeToast(item);
+                } else {
+                    isFlagGroup = false;
                 }
             }
 
@@ -76,7 +79,6 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    //TODO: выбирается +1 элемент, если откатывать в методе вручную, то NPE
     private void academicAdapterSpinner() {
         Spinner discipline = findViewById(R.id.s2);
         SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
@@ -86,10 +88,13 @@ public class FixDeliveryActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
+                    isFlagSubject = true;
                     SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
                     String item = String.valueOf(subject.getName()); //
                     name = item;
                     Toast.makeText(FixDeliveryActivity.this, item, Toast.LENGTH_SHORT).show();
+                } else {
+                    isFlagSubject = false;
                 }
             }
 
@@ -104,8 +109,12 @@ public class FixDeliveryActivity extends AppCompatActivity {
     private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(v -> {
-            makeToast("Тут должен быть ответ в базу данных :D");
-            openFixStudentActivity();
+            if (isFlagGroup == true && isFlagSubject == true){
+                openFixStudentActivity();
+            } else {
+                makeToast("Выберите группу и предмет");
+            }
+            //проверять флаг
         });
     }
 

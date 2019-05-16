@@ -79,7 +79,6 @@ public class FixStudentsActivity extends AppCompatActivity {
         activity.startActivity(fixStudentIntent);
     }
 
-    //TODO подумать над data-классом для адаптера, какие значения там нужны
     private List<StudentsData> writeDBStudents(){
         List<StudentsData> studentsDataList = new ArrayList<>();
         for (int i = 0; i < FakeDataClass.INSTANCE.getStudentList().size(); i++){

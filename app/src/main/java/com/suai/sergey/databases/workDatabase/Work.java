@@ -18,7 +18,7 @@ public class Work {
     private int number;
     @ColumnInfo(name = "name_work")
     private String name;
-    @ColumnInfo(name = "max_ball")
+    @ColumnInfo(name = "max_mark")
     private int maxMarks;
 
     public int getId() {

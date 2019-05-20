@@ -105,16 +105,14 @@ public class FixDeliveryActivity extends AppCompatActivity {
         });
     }
 
-    //нужно изменить
     private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(v -> {
-            if (isFlagGroup == true && isFlagSubject == true){
+            if (isFlagGroup && isFlagSubject){
                 openFixStudentActivity();
             } else {
                 makeToast("Выберите группу и предмет");
             }
-            //проверять флаг
         });
     }
 

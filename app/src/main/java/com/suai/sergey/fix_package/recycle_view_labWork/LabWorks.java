@@ -15,19 +15,19 @@ public class LabWorks {
         this.isMarks = isMarks;
     }
 
-    public String getNumberWork() {
+    String getNumberWork() {
         return numberWork;
     }
 
-    public String getNameWork() {
+    String getNameWork() {
         return nameWork;
     }
 
-    public int getMark() {
+    int getMark() {
         return mark;
     }
 
-    public boolean isMarks() {
+    boolean isMarks() {
         return isMarks;
     }
 }

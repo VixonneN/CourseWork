@@ -21,10 +21,12 @@
         android:text="нахвание лабора"
 
         />
+
     <Spinner
-        android:id="@+id/item_marks"
+        android:id="@+id/item_spinner_marks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         />
 
     <Button
@@ -32,26 +34,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сдать"
+        android:layout_weight="1"
+
         />
 
     <ImageView
+        android:id="@+id/item_complete_work"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/check_bold"
         tools:ignore="ContentDescription"
+        android:layout_weight="1"
+
         />
 
     <TextView
+        android:id="@+id/item_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="99"
         android:textSize="30sp"
+        android:layout_weight="1"
+
         />
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/item_delete_mark"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/alpha_x_circle_outline"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:layout_weight="1"
+        />
 
 </LinearLayout>

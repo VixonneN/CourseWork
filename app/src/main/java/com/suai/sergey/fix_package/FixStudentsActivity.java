@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
-import com.suai.sergey.databases.studentDatabase.FioStudent;
 import com.suai.sergey.fix_package.recycle_view_students.FixStudentAdapter;
 import com.suai.sergey.fix_package.recycle_view_students.StudentsData;
 
@@ -25,17 +24,16 @@ public class FixStudentsActivity extends AppCompatActivity {
     private String number;
     private String name;
     private String nameStudent;
-    private FioStudent fioStudents;
-    private List<FioStudent> getList;
-
+    private TextView numberGroup;
+    private TextView nameSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_students);
 
-        TextView numberGroup = findViewById(R.id.tv_group);
-        TextView nameSubject = findViewById(R.id.tv_discipline);
+        numberGroup = findViewById(R.id.tv_labwork_group);
+        nameSubject = findViewById(R.id.tv_discipline);
 
         number = getIntent().getStringExtra("numberGroup");
         name = getIntent().getStringExtra("nameSubject");
@@ -55,13 +53,16 @@ public class FixStudentsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.fix_students_recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        FixStudentAdapter adapter = new FixStudentAdapter(writeDBStudents());
-        recyclerView.setAdapter(adapter);
-//        FixStudentAdapter adapter = new FixStudentAdapter((studentsData, position) ->
-//                FixLabWorkActivity.start(FixStudentsActivity.this, number, name, nameStudent));
-//        recyclerView.setAdapter(adapter);
-    }
 
+        FixStudentAdapter.OnItemClickListener onItemClickListener = (studentsData, position) -> {
+            String numberGroups =  numberGroup.getText().toString();
+            String nameSubjects = nameSubject.getText().toString();
+            nameStudent = studentsData.getNameStudent();
+            FixLabWorkActivity.start(FixStudentsActivity.this, numberGroups, nameSubjects, nameStudent);
+        };
+
+        recyclerView.setAdapter(new FixStudentAdapter(writeDBStudents(), onItemClickListener));
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

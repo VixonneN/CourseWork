@@ -17,34 +17,27 @@ public class FixStudentAdapter extends RecyclerView.Adapter<FixStudentAdapter.St
 
     private OnItemClickListener onItemClickListener;
 
-    public FixStudentAdapter(List<StudentsData> studentsDataList) {
+    public FixStudentAdapter(List<StudentsData> studentsDataList, OnItemClickListener onItemClickListener) {
         this.studentsDataList = studentsDataList;
+        this.onItemClickListener = onItemClickListener;
     }
-
-//    @NonNull
-//    @Override
-//    public StudentsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-//        View itemView = layoutInflater.inflate(R.layout.students_item, parent, false);
-//
-//        final StudentsHolder holder = new StudentsHolder(itemView);
-//        holder.nameStudents.setOnClickListener(v -> {
-//            int position = holder.getAdapterPosition();
-//            if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {//условия перехода
-//                StudentsData studentsData = this.studentsDataList.get(position);
-//                onItemClickListener.onItemClick(studentsData, position);
-//            }
-//        });
-//
-//        return holder;
-//    }
 
     @NonNull
     @Override
-    public StudentsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.students_item, viewGroup, false);
-        return new StudentsHolder(itemView);
+    public StudentsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View itemView = layoutInflater.inflate(R.layout.students_item, parent, false);
+
+        final StudentsHolder holder = new StudentsHolder(itemView);
+        holder.nameStudents.setOnClickListener(v -> {
+            int position = holder.getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION && onItemClickListener != null) {//условия перехода
+                StudentsData studentsData = this.studentsDataList.get(position);
+                onItemClickListener.onItemClick(studentsData, position);
+            }
+        });
+
+        return holder;
     }
 
     @Override

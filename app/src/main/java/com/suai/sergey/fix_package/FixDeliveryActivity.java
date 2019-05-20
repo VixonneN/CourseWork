@@ -34,10 +34,16 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
         deliveryButton();
 
+        actionBar();
+
+    }
+
+    private void actionBar() {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
@@ -63,10 +69,8 @@ public class FixDeliveryActivity extends AppCompatActivity {
                     //флаг для перехода
                     isFlagGroup = true;
                     NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
-                    String item = String.valueOf(ng.getNumber());
-//                    textSpinner.add(0, item);
-                    number = item;
-                    makeToast(item);
+                    //                    textSpinner.add(0, item);
+                    number = String.valueOf(ng.getNumber());
                 } else {
                     isFlagGroup = false;
                 }
@@ -90,9 +94,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
                 if (position != 0) {
                     isFlagSubject = true;
                     SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
-                    String item = String.valueOf(subject.getName()); //
-                    name = item;
-                    Toast.makeText(FixDeliveryActivity.this, item, Toast.LENGTH_SHORT).show();
+                    name = String.valueOf(subject.getName());
                 } else {
                     isFlagSubject = false;
                 }
@@ -108,7 +110,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
     private void deliveryButton() {
         Button fixDelivery = findViewById(R.id.deliveryBtnFix);
         fixDelivery.setOnClickListener(v -> {
-            if (isFlagGroup && isFlagSubject){
+            if (isFlagGroup && isFlagSubject) {
                 openFixStudentActivity();
             } else {
                 makeToast("Выберите группу и предмет");

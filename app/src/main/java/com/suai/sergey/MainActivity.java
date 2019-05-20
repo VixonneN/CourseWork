@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
     }
 
-    private void makeToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
+//    private void makeToast(String text) {
+//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+//    }
 }

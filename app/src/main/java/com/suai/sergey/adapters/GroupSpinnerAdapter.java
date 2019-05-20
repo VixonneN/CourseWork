@@ -50,11 +50,9 @@ public class GroupSpinnerAdapter extends BaseAdapter {
             groups.add(String.valueOf(number.getNumber()));
         }
 
-        if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);
             TextView textView = convertView.findViewById(R.id.spinner_id);
             textView.setText(String.valueOf(groups.get(position)));
-        }
         return convertView;
     }
 }

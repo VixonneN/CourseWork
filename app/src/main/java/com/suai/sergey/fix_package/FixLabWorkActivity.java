@@ -27,15 +27,26 @@ public class FixLabWorkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_lab_work);
 
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         numberGroup = findViewById(R.id.tv_labwork_group);
         nameSubject = findViewById(R.id.tv_labWork_discipline);
         fioStudent = findViewById(R.id.tv_labWork_student);
 
+        getIntents();
+
+        actionBar();
+
+        addRecycleView();
+
+    }
+
+    private void actionBar(){
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void getIntents(){
         number = getIntent().getStringExtra("numberGroup");
         name = getIntent().getStringExtra("nameSubject");
         fio = getIntent().getStringExtra("nameStudent");
@@ -43,9 +54,6 @@ public class FixLabWorkActivity extends AppCompatActivity {
         numberGroup.setText(number);
         nameSubject.setText(name);
         fioStudent.setText(fio);
-
-        addRecycleView();
-
     }
 
     private void addRecycleView() {

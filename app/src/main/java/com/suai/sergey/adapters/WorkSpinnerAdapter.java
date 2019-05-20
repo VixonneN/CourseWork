@@ -48,11 +48,10 @@ public class WorkSpinnerAdapter extends BaseAdapter {
             workList.add(String.valueOf(nameWork.getName()));
         }
 
-        if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);
             TextView textView = convertView.findViewById(R.id.spinner_id);
             textView.setText(String.valueOf(workList.get(position)));
-        }
+
         return convertView;
     }
 }

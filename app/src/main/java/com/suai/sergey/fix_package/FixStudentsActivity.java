@@ -21,8 +21,6 @@ import java.util.List;
 
 public class FixStudentsActivity extends AppCompatActivity {
 
-    private String number;
-    private String name;
     private String nameStudent;
     private TextView numberGroup;
     private TextView nameSubject;
@@ -35,18 +33,20 @@ public class FixStudentsActivity extends AppCompatActivity {
         numberGroup = findViewById(R.id.tv_labwork_group);
         nameSubject = findViewById(R.id.tv_discipline);
 
-        number = getIntent().getStringExtra("numberGroup");
-        name = getIntent().getStringExtra("nameSubject");
+        getIntents();
+
+        actionBar();
+
+        addRecycleView();
+    }
+
+    private void getIntents(){
+        String number = getIntent().getStringExtra("numberGroup");
+        String name = getIntent().getStringExtra("nameSubject");
 
         numberGroup.setText(number);
         nameSubject.setText(name);
 
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        addRecycleView();
     }
 
     private void addRecycleView() {
@@ -62,6 +62,14 @@ public class FixStudentsActivity extends AppCompatActivity {
         };
 
         recyclerView.setAdapter(new FixStudentAdapter(writeDBStudents(), onItemClickListener));
+    }
+
+    private void actionBar(){
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
@@ -87,11 +95,6 @@ public class FixStudentsActivity extends AppCompatActivity {
         }
         return studentsDataList;
     }
-
-    public void openFixLabWOrkActivity(){
-        FixLabWorkActivity.start(this, number,  name, nameStudent);
-    }
-
 
     private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

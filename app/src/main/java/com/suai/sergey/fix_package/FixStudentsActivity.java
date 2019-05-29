@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
+import com.suai.sergey.databases.AppDatabase;
+import com.suai.sergey.databases.studentDatabase.Student;
 import com.suai.sergey.fix_package.recycle_view_students.FixStudentAdapter;
 import com.suai.sergey.fix_package.recycle_view_students.StudentsData;
 
@@ -36,6 +38,8 @@ public class FixStudentsActivity extends AppCompatActivity {
         getIntents();
 
         actionBar();
+
+//        addToDB();
 
         addRecycleView();
     }
@@ -96,7 +100,20 @@ public class FixStudentsActivity extends AppCompatActivity {
         return studentsDataList;
     }
 
+
+
+//    private void addToDB(){
+//        AppDatabase.getAppDatabase(this).worksDao().insertStudent(FakeDataClass.INSTANCE.getStudentList());
+//
+//    }
+
     private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        AppDatabase.destroyInstance();
+        super.onDestroy();
     }
 }

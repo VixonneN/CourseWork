@@ -18,7 +18,6 @@ public class LabWorks {
     String getNumberWork() {
         return numberWork;
     }
-
     String getNameWork() {
         return nameWork;
     }
@@ -26,7 +25,6 @@ public class LabWorks {
     int getMark() {
         return mark;
     }
-
     boolean isMarks() {
         return isMarks;
     }

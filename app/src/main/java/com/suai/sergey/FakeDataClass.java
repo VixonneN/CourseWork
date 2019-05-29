@@ -2,6 +2,7 @@ package com.suai.sergey;
 
 import android.support.annotation.NonNull;
 
+import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
@@ -156,5 +157,4 @@ public enum FakeDataClass {
         marks.add(2, "Сдано");
         return marks;
     }
-
 }

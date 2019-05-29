@@ -17,8 +17,8 @@ import java.util.List;
 public class SubjectSpinnerAdapter extends BaseAdapter {
 
 
-    private LayoutInflater layoutInflater;
-    private List<SubjectName> subjectNames;
+    private final LayoutInflater layoutInflater;
+    private final List<SubjectName> subjectNames;
 
     public SubjectSpinnerAdapter(Context context, List<SubjectName> subjectNames) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

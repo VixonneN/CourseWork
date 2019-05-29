@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
+import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.fix_package.recycle_view_labWork.FixLabWorkAdapter;
 import com.suai.sergey.fix_package.recycle_view_labWork.LabWorks;
 
@@ -21,6 +22,7 @@ public class FixLabWorkActivity extends AppCompatActivity {
 
     private TextView numberGroup, nameSubject, fioStudent;
     private String number, name, fio;
+    private FixLabWorkAdapter labWorkAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +89,10 @@ public class FixLabWorkActivity extends AppCompatActivity {
     private List<LabWorks> generateLabWork(){
         List<LabWorks> labWorksList = new ArrayList<>();
         labWorksList.add(new LabWorks("1", "курсовая", 5, true));
-        labWorksList.add(new LabWorks("2", "курсовая", 5, false));
-        labWorksList.add(new LabWorks("3", "курсовая", 5, true));
-        labWorksList.add(new LabWorks("4", "курсовая", 5, false));
-        labWorksList.add(new LabWorks("5", "курсовая", 5, true));
+        labWorksList.add(new LabWorks("2", "курсовая", 0, false));
+        labWorksList.add(new LabWorks("3", "курсовая", 10, true));
+        labWorksList.add(new LabWorks("4", "курсовая", 0, false));
+        labWorksList.add(new LabWorks("5", "курсовая", 15, true));
 
         return labWorksList;
     }
@@ -103,5 +105,9 @@ public class FixLabWorkActivity extends AppCompatActivity {
         activity.startActivity(fixLabWork);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        AppDatabase.destroyInstance();
+        super.onDestroy();
+    }
 }

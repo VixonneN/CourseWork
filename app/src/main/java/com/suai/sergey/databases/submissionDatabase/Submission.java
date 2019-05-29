@@ -4,27 +4,26 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.suai.sergey.databases.workDatabase.Work;
 import com.suai.sergey.databases.studentDatabase.Student;
 
-@Entity(foreignKeys = {@ForeignKey(entity = Work.class, parentColumns = "id", childColumns = "idWork"),
-                       @ForeignKey(entity = Student.class, parentColumns = "id", childColumns = "idStudent")},
-        indices = {@Index("idWork"),
-                   @Index("idStudent")})
+@Entity
 public class Submission {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     private int idStudent;//ссылка
     private int idWork;//ссылка
     private String date;
     private int mark;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

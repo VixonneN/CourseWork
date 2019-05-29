@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
+import com.suai.sergey.databases.studentDatabase.Student;
 
 import java.util.List;
 
@@ -46,6 +47,11 @@ public class FixStudentAdapter extends RecyclerView.Adapter<FixStudentAdapter.St
         studentsHolder.nameStudents.setText(studentsData.getNameStudent());
         studentsHolder.numberStudentInGroup.setText(String.valueOf(studentsData.getNumberStudentFromGroup()));
     }
+
+//    public void updateList(List<Student> updatedList) {
+//        mNoteList = updatedList;
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public int getItemCount() {

@@ -1,29 +1,17 @@
-package com.suai.sergey.databases.studentDatabase;
+package com.suai.sergey.network.data_classes;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-
-import com.suai.sergey.databases.groupDatabase.Group;
-
-@Entity
-public class Student {
-
-    @PrimaryKey
-    @NonNull
+public class TeacherData {
     private String id;
+
     private String firstName;
+
     private String secondName;
+
     private String lastName;
-    private int idGroup;
 
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -31,7 +19,6 @@ public class Student {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -39,7 +26,6 @@ public class Student {
     public String getSecondName() {
         return secondName;
     }
-
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
@@ -47,16 +33,7 @@ public class Student {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public int getIdGroup() {
-        return idGroup;
-    }
-
-    public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
     }
 }

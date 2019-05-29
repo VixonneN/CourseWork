@@ -17,8 +17,8 @@ import java.util.List;
 public class StudentSpinnerAdapter extends BaseAdapter {
 
 
-    private LayoutInflater layoutInflater;
-    private List<FioStudent> studentList;
+    private final LayoutInflater layoutInflater;
+    private final List<FioStudent> studentList;
 
     public StudentSpinnerAdapter(Context context, List<FioStudent> studentList) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

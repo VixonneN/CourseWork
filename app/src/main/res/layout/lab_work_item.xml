@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
@@ -34,8 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сдать"
-        android:layout_weight="1"
-
         />
 
     <ImageView
@@ -44,17 +42,13 @@
         android:layout_height="30dp"
         android:src="@drawable/check_bold"
         tools:ignore="ContentDescription"
-        android:layout_weight="1"
-
         />
 
     <TextView
         android:id="@+id/item_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="99"
         android:textSize="30sp"
-        android:layout_weight="1"
 
         />
 
@@ -64,7 +58,6 @@
         android:layout_height="30dp"
         android:src="@drawable/alpha_x_circle_outline"
         tools:ignore="ContentDescription"
-        android:layout_weight="1"
         />
 
 </LinearLayout>

@@ -52,6 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_labWork_student"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="200dp"
         >
 
     </android.support.v7.widget.RecyclerView>

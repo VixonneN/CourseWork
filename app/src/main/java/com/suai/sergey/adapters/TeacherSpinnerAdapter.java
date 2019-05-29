@@ -9,30 +9,30 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
-import com.suai.sergey.databases.groupDatabase.NumberGroup;
+import com.suai.sergey.databases.teacherDatabase.FioTeacher;
+import com.suai.sergey.network.data_classes.TeacherData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupSpinnerAdapter extends BaseAdapter {
-
+public class TeacherSpinnerAdapter extends BaseAdapter {
 
     private final LayoutInflater layoutInflater;
-    private final List<NumberGroup> numberGroups;
+    private final List<FioTeacher> teacherData;
 
-    public GroupSpinnerAdapter(Context context, List<NumberGroup> numberGroups) {
+    public TeacherSpinnerAdapter(Context context, List<FioTeacher> teacherData) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.numberGroups = numberGroups;
+        this.teacherData = teacherData;
     }
 
     @Override
     public int getCount() {
-        return numberGroups.size() + 1;
+        return teacherData.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {
-        return numberGroups.get(position - 1);
+        return teacherData.get(position - 1);
     }
 
     @Override
@@ -44,15 +44,16 @@ public class GroupSpinnerAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        List<String> groups = new ArrayList<>();
-        groups.add(" ");
-        for (NumberGroup number : numberGroups) {
-            groups.add(String.valueOf(number.getNumber()));
+        List<String> teacherList = new ArrayList<>();
+        teacherList.add("");
+        for (FioTeacher fioTeacher : teacherData){
+            teacherList.add(fioTeacher.getFirstName() + " " + fioTeacher.getLastName());
         }
 
         convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);
         TextView textView = convertView.findViewById(R.id.spinner_id);
-        textView.setText(String.valueOf(groups.get(position)));
+        textView.setText(String.valueOf(teacherList.get(position)));
+
         return convertView;
     }
 }

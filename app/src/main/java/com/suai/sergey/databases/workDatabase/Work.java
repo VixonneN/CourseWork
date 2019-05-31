@@ -22,6 +22,9 @@ public class Work {
     private String name;
     @ColumnInfo(name = "max_mark")
     private int maxMarks;
+    @ColumnInfo(name = "order_number")
+    private String orderNumber;
+    private String type;
 
     public int getId() {
         return id;
@@ -56,5 +59,19 @@ public class Work {
     }
     public void setMaxMarks(int maxMarks) {
         this.maxMarks = maxMarks;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 }

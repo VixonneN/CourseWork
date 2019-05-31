@@ -3,6 +3,9 @@ package com.suai.sergey.databases.teacherDatabase;
 import android.arch.persistence.room.ColumnInfo;
 
 public class FioTeacher {
+    private String id;
+
+
     @ColumnInfo(name = "first_name")
     private String firstName;
     @ColumnInfo(name = "last_name")
@@ -20,5 +23,12 @@ public class FioTeacher {
     }
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 }

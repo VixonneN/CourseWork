@@ -23,7 +23,6 @@ public class Student {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -31,7 +30,6 @@ public class Student {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -39,7 +37,6 @@ public class Student {
     public String getSecondName() {
         return secondName;
     }
-
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
@@ -47,7 +44,6 @@ public class Student {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -55,7 +51,6 @@ public class Student {
     public int getIdGroup() {
         return idGroup;
     }
-
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }

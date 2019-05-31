@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkSpinnerAdapter extends BaseAdapter {
-    private LayoutInflater layoutInflater;
-    private List<NameWork> nameWorks;
+
+
+    private final LayoutInflater layoutInflater;
+    private final List<NameWork> nameWorks;
 
     public WorkSpinnerAdapter(Context context, List<NameWork> nameWorks) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

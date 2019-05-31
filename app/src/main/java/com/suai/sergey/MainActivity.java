@@ -4,49 +4,61 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.suai.sergey.adapters.TeacherSpinnerAdapter;
 import com.suai.sergey.databases.AppDatabase;
+import com.suai.sergey.databases.teacherDatabase.FioTeacher;
 import com.suai.sergey.databases.teacherDatabase.Teacher;
 import com.suai.sergey.fix_package.FixDeliveryActivity;
 import com.suai.sergey.free_package.FreeDeliveryActivity;
-import com.suai.sergey.network.Api;
-import com.suai.sergey.network.NetworkModule;
 import com.suai.sergey.network.data_classes.TeacherData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class MainActivity extends AppCompatActivity {
 
-    private TeacherData teacherData;
-    private TextView tvFirstName, tvSecondName, tvLastName;
-    private static final String TAG = "123";
+    private String id, firstName, secondName, lastName, idSpinner;
+    private boolean isFlagTeacher = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvFirstName = findViewById(R.id.firstName);
-        tvSecondName = findViewById(R.id.secondName);
-        tvLastName = findViewById(R.id.lastName);
-
         fixDeliveryButton();
         freeDeliveryButton();
         networkResponse();
+        teacherSpinner();
     }
 
     private void teacherSpinner() {
+        Spinner teacherSpinner = findViewById(R.id.teacher_spinner);
+        TeacherSpinnerAdapter adapter = new TeacherSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getFioTeacher());
+        teacherSpinner.setAdapter(adapter);
+        teacherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+                    FioTeacher nb = (FioTeacher) parent.getItemAtPosition(position);
+                    idSpinner = String.valueOf(nb.getId());
+                    isFlagTeacher = true;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void networkResponse() {
@@ -56,19 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<TeacherData> data = response.body();
                     assert data != null;
-                    makeToast(String.valueOf(data.size()));
-                    Log.d(TAG, String.valueOf(data.size()));
 
                     for (int i = 0; i < data.size(); i++) {
-                        String id = data.get(i).getId();
-                        String firstName = data.get(i).getFirstName();
-                        String secondName = data.get(i).getSecondName();
-                        String lastName = data.get(i).getLastName();
-
-                        tvFirstName.setText(firstName);
-                        tvSecondName.setText(secondName);
-                        tvLastName.setText(lastName);
-
+                        id = data.get(i).getId();
+                        firstName = data.get(i).getFirstName();
+                        secondName = data.get(i).getSecondName();
+                        lastName = data.get(i).getLastName();
 
                         Teacher teacher = createTeacher(id, firstName, secondName, lastName);
 
@@ -82,35 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 makeToast("Запрос завален1");
             }
         });
-
-//        getApp().getApi().getTeacher("c380be58-f3d9-4524-b929-7a8e219a6e66").enqueue(new Callback<TeacherData>() {
-//            @Override
-//            public void onResponse(@NonNull Call<TeacherData> call, @NonNull Response<TeacherData> response) {
-//                if (response.isSuccessful()) {
-//                    TeacherData data = response.body();
-//
-//                    assert data != null;
-//                    String firstNameData = data.getFirstName();
-//                    String secondNameData = data.getSecondName();
-//                    String lastNameData = data.getLastName();
-//
-////                    tvFirstName.setText(firstNameData);
-////                    tvSecondName.setText(secondNameData);
-////                    tvLastName.setText(lastNameData);
-//
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<TeacherData> call, @NonNull Throwable t) {
-//                makeToast("запрос завален2");
-//            }
-//        });
-    }
-
-    private void setFioData(){
-        AppDatabase.getAppDatabase(this).worksDao().getFioTeacher();
     }
 
     private Teacher createTeacher(String id, String firstName, String secondName, String lastName) {
@@ -128,12 +104,15 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    //TODO добавить тут бд + запрос с сервера для получения данных для бд
-
     private void fixDeliveryButton() {
-        final Intent fixDeliveryIntent = new Intent(MainActivity.this, FixDeliveryActivity.class);
         Button fixDelivery = findViewById(R.id.fix_delivery);
-        fixDelivery.setOnClickListener(v -> startActivity(fixDeliveryIntent));
+        fixDelivery.setOnClickListener(v -> {
+            if (isFlagTeacher) {
+                openFixDeliveryActivity();
+            } else {
+                makeToast("Выберите преподавателя");
+            }
+        });
     }
 
     private void freeDeliveryButton() {
@@ -148,5 +127,9 @@ public class MainActivity extends AppCompatActivity {
 
     private App getApp() {
         return ((App) getApplication());
+    }
+
+    private void openFixDeliveryActivity() {
+        FixDeliveryActivity.start(this, idSpinner);
     }
 }

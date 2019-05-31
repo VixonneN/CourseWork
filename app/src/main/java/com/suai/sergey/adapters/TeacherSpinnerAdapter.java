@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.suai.sergey.R;
 import com.suai.sergey.databases.teacherDatabase.FioTeacher;
-import com.suai.sergey.network.data_classes.TeacherData;
 
 import java.util.ArrayList;
 import java.util.List;

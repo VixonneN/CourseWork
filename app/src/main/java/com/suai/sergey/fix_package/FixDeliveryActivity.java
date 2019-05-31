@@ -1,5 +1,7 @@
 package com.suai.sergey.fix_package;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +22,7 @@ import com.suai.sergey.databases.subjectDatabase.SubjectName;
 public class FixDeliveryActivity extends AppCompatActivity {
 
     private String name;
-    private String number;
+    private String number, idSpinner;
     private boolean isFlagGroup;
     private boolean isFlagSubject;
 
@@ -29,6 +31,7 @@ public class FixDeliveryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fix_delivery);
 
+        getIntents();
         classAdapterSpinner();
         academicAdapterSpinner();
 
@@ -36,6 +39,11 @@ public class FixDeliveryActivity extends AppCompatActivity {
 
         actionBar();
 
+    }
+
+    private void getIntents(){
+        idSpinner = getIntent().getStringExtra("idSpinner");
+        Toast.makeText(this, idSpinner, Toast.LENGTH_SHORT).show();
     }
 
     private void actionBar() {
@@ -69,7 +77,6 @@ public class FixDeliveryActivity extends AppCompatActivity {
                     //флаг для перехода
                     isFlagGroup = true;
                     NumberGroup ng = (NumberGroup) parent.getItemAtPosition(position);
-                    //                    textSpinner.add(0, item);
                     number = String.valueOf(ng.getNumber());
                 } else {
                     isFlagGroup = false;
@@ -117,6 +124,13 @@ public class FixDeliveryActivity extends AppCompatActivity {
             }
         });
     }
+
+    public static void start(Activity activity, String idSpinner){
+        Intent intent = new Intent(activity, FixDeliveryActivity.class);
+        intent.putExtra("idSpinner", idSpinner);
+        activity.startActivity(intent);
+    }
+
 
     public void openFixStudentActivity() {
         FixStudentsActivity.start(this, number, name);

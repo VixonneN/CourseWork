@@ -9,6 +9,7 @@
     <string name="labwork">Лабораторная работа</string>
     <string name="mark">Оценка</string>
     <string name="select_lab_work">Выбор лабораторной работы</string>
+    <string name="teacher">Преподаватель</string>
     <string-array name="marks">
         <item>Сдано</item>
         <item>Не сдано</item>

@@ -14,6 +14,7 @@ public class Subject {
     private String id;
     @ColumnInfo(name = "subject_name")
     private String name;
+    private String type;
 
     public String getId() {
         return id;
@@ -27,5 +28,13 @@ public class Subject {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

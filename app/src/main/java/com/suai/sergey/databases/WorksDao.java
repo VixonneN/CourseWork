@@ -35,8 +35,9 @@ public interface WorksDao {
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    void insertGroup(Group... groups);
 
-    @Query("select first_name, last_name from teacher")
+    @Query("select id, first_name, last_name from teacher")
     List<FioTeacher> getFioTeacher();
+
 //    @Query("select number_work from work")
 //    List<NumberGroup> getNumberGroup();
 
@@ -51,3 +52,4 @@ public interface WorksDao {
 //    void insertSubject(Subject... subjects);
 //
 }
+//stetho

@@ -17,33 +17,23 @@ public class NetworkModule {
 
     private final Api api;
 
-    public NetworkModule(){
+    public NetworkModule() {
         final Gson gson = provideGson();
         final OkHttpClient okHttpClient = provideOkHttpClient();
         final Retrofit retrofit = provideRetrofit(okHttpClient, gson);
 
         api = provideApi(retrofit);
-//        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-//        builder.addInterceptor(loggingInterceptor);
-//        final Retrofit retrofit = new Retrofit.Builder()
-//                .client(builder.build())
-//                .baseUrl(Api.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        getApi = retrofit.create(Api.class);
     }
 
-    public Api getApi(){
+    public Api getApi() {
         return api;
     }
 
-    private OkHttpClient provideOkHttpClient(){
+    private OkHttpClient provideOkHttpClient() {
 
         final HttpLoggingInterceptor.Logger logger = message -> Log.d("OkHttp", message);
 
-            final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(logger) //
+        final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(logger) //
                 .setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         return new OkHttpClient.Builder()
@@ -54,11 +44,11 @@ public class NetworkModule {
                 .build();
     }
 
-    private Gson provideGson(){
+    private Gson provideGson() {
         return new GsonBuilder().create();
     }
 
-    private Retrofit provideRetrofit(OkHttpClient okHttpClient, Gson gson){
+    private Retrofit provideRetrofit(OkHttpClient okHttpClient, Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -66,7 +56,7 @@ public class NetworkModule {
                 .build();
     }
 
-    private Api provideApi(Retrofit retrofit){
+    private Api provideApi(Retrofit retrofit) {
         return retrofit.create(Api.class);
     }
 

@@ -55,4 +55,5 @@ public class TeacherSpinnerAdapter extends BaseAdapter {
 
         return convertView;
     }
+    //addAll(List<FioTeacher>)
 }

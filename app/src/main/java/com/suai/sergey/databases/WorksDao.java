@@ -1,6 +1,7 @@
 package com.suai.sergey.databases;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -32,11 +33,22 @@ public interface WorksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTeacher(Teacher... teachers);
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    void insertGroup(Group... groups);
-
     @Query("select id, first_name, last_name from teacher")
     List<FioTeacher> getFioTeacher();
+
+    //deleteAll
+    @Query("delete from teacher")
+    void deleteAllTeachers();
+    @Query("delete from `group`")
+    void deleteAllGroups();
+    @Query("delete from student")
+    void deleteAllStudents();
+    @Query("delete from subject")
+    void deleteAllSubjects();
+    @Query("delete from submission")
+    void deleteAllSubmissions();
+    @Query("delete from work")
+    void deleteAllWorks();
 
 //    @Query("select number_work from work")
 //    List<NumberGroup> getNumberGroup();

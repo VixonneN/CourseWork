@@ -14,8 +14,8 @@ public class Work {
 
     @PrimaryKey
     @NonNull
-    private int id;
-    private int idSubject;
+    private String id;
+    private String idSubject;
     @ColumnInfo(name = "number_work")
     private int number;
     @ColumnInfo(name = "name_work")
@@ -26,17 +26,18 @@ public class Work {
     private String orderNumber;
     private String type;
 
-    public int getId() {
+    @NonNull
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
-    public int getIdSubject() {
+    public String getIdSubject() {
         return idSubject;
     }
-    public void setIdSubject(int idSubject) {
+    public void setIdSubject(String idSubject) {
         this.idSubject = idSubject;
     }
 

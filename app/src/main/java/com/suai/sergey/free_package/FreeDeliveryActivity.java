@@ -155,6 +155,7 @@ public class FreeDeliveryActivity extends AppCompatActivity {
         Spinner markSpinner = findViewById(R.id.markSpinnerFree);
         ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.marks, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.addAll();
         markSpinner.setAdapter(adapter);
         markSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -36,11 +36,7 @@ public class FixStudentsActivity extends AppCompatActivity {
         nameSubject = findViewById(R.id.tv_discipline);
 
         getIntents();
-
         actionBar();
-
-//        addToDB();
-
         addRecycleView();
     }
 
@@ -50,7 +46,6 @@ public class FixStudentsActivity extends AppCompatActivity {
 
         numberGroup.setText(number);
         nameSubject.setText(name);
-
     }
 
     private void addRecycleView() {
@@ -82,6 +77,7 @@ public class FixStudentsActivity extends AppCompatActivity {
             this.finish();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -95,17 +91,10 @@ public class FixStudentsActivity extends AppCompatActivity {
     private List<StudentsData> writeDBStudents(){
         List<StudentsData> studentsDataList = new ArrayList<>();
         for (int i = 0; i < FakeDataClass.INSTANCE.getStudentList().size(); i++){
-            studentsDataList.add(new StudentsData(i, String.valueOf(FakeDataClass.INSTANCE.getStudentList().get(i).getFio())));
+            studentsDataList.add(new StudentsData(i + 1, String.valueOf(FakeDataClass.INSTANCE.getStudentList().get(i).getFio())));
         }
         return studentsDataList;
     }
-
-
-
-//    private void addToDB(){
-//        AppDatabase.getAppDatabase(this).worksDao().insertStudent(FakeDataClass.INSTANCE.getStudentList());
-//
-//    }
 
     private void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

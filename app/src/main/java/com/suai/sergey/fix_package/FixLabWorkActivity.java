@@ -34,9 +34,7 @@ public class FixLabWorkActivity extends AppCompatActivity {
         fioStudent = findViewById(R.id.tv_labWork_student);
 
         getIntents();
-
         actionBar();
-
         addRecycleView();
 
     }

@@ -34,11 +34,8 @@ public class FixDeliveryActivity extends AppCompatActivity {
         getIntents();
         classAdapterSpinner();
         academicAdapterSpinner();
-
         deliveryButton();
-
         actionBar();
-
     }
 
     private void getIntents(){
@@ -51,7 +48,6 @@ public class FixDeliveryActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override

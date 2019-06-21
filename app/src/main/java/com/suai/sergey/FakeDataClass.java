@@ -3,12 +3,17 @@ package com.suai.sergey;
 import android.support.annotation.NonNull;
 
 import com.suai.sergey.databases.AppDatabase;
+import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.studentDatabase.Student;
+import com.suai.sergey.databases.subjectDatabase.Subject;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.submissionDatabase.Submission;
+import com.suai.sergey.databases.workDatabase.IdNameNumberMaxBallWork;
 import com.suai.sergey.databases.workDatabase.NameWork;
 import com.suai.sergey.databases.workDatabase.NumberWork;
+import com.suai.sergey.databases.workDatabase.Work;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +59,33 @@ public enum FakeDataClass {
         return submission;
     }
 
-    public NumberWork createNumberWork(int numberWork){
+    public NumberWork createNumberWork(int numberWork) {
         NumberWork numberWork1 = new NumberWork();
         numberWork1.setNumber(numberWork);
         return numberWork1;
     }
 
-    public List<NumberWork> getNumberWork(){
+    public IdNameNumberMaxBallWork createWork(String id, String name, int number, int maxBall) {
+        IdNameNumberMaxBallWork idNameNumberMaxBallWork = new IdNameNumberMaxBallWork();
+        idNameNumberMaxBallWork.setId(id);
+        idNameNumberMaxBallWork.setName(name);
+        idNameNumberMaxBallWork.setNumber(number);
+        idNameNumberMaxBallWork.setMaxMarks(maxBall);
+        return idNameNumberMaxBallWork;
+    }
+
+    public List<IdNameNumberMaxBallWork> getIdNameNumberMaxBallWork() {
+        List<IdNameNumberMaxBallWork> workList = new ArrayList<>();
+        workList.add(createWork("1234", "Курсовая работа", 1, 15));
+        workList.add(createWork("1324", "Дипломная работа", 2, 15));
+        workList.add(createWork("1423", "Лабораторная работа №1", 3, 15));
+        workList.add(createWork("1432", "Лабораторная работа №2", 4, 15));
+        workList.add(createWork("2134", "Лабораторная работа №3", 5, 15));
+        workList.add(createWork("2314", "Лабораторная работа №4", 6, 15));
+        return workList;
+    }
+
+    public List<NumberWork> getNumberWork() {
         List<NumberWork> numberWorks = new ArrayList<>();
         numberWorks.add(createNumberWork(10));
         return numberWorks;
@@ -150,11 +175,56 @@ public enum FakeDataClass {
         return submissionList;
     }
 
-    public List<String> addMark(){
+    public List<String> addMark() {
         List<String> marks = new ArrayList<>();
         marks.add(0, "");
         marks.add(1, "Не сдано");
         marks.add(2, "Сдано");
         return marks;
+    }
+
+    //бд группы
+//    public Group createGroup(String id, int number) {
+//        Group group = new Group();
+//        group.setId(id);
+//        group.setNumber(number);
+//        return group;
+//    }
+
+    public void addGroups(){
+
+    }
+
+    //бд студента
+    public Student createStudent(String id, String firstName, String secondName, String lastName, String idGroup) {
+        Student student = new Student();
+        student.setId(id);
+        student.setFirstName(firstName);
+        student.setSecondName(secondName);
+        student.setLastName(lastName);
+        student.setIdGroup(idGroup);
+        return student;
+    }
+
+    //бд предмета
+    public Subject createSubject(String id, String name, String type) {
+        Subject subject = new Subject();
+        subject.setId(id);
+        subject.setName(name);
+        subject.setType(type);
+        return subject;
+    }
+
+    //бд работы
+    public Work createWork(String id, String idSubject, int number, String name, int maxMarks, String orderNumber, String type) {
+        Work work = new Work();
+        work.setId(id);
+        work.setIdSubject(idSubject);
+        work.setNumber(number);
+        work.setName(name);
+        work.setMaxMarks(maxMarks);
+        work.setOrderNumber(orderNumber);
+        work.setType(type);
+        return work;
     }
 }

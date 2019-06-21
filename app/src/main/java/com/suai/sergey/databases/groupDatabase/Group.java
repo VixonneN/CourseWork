@@ -13,7 +13,7 @@ public class Group {
     private String id;
 
     @ColumnInfo(name = "number_group")
-    private int number;
+    private String numberGroup;
 
     public String getId() {
         return id;
@@ -22,10 +22,10 @@ public class Group {
         this.id = id;
     }
 
-    public int getNumber() {
-        return number;
+    public String getNumberGroup() {
+        return numberGroup;
     }
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumberGroup(String numberGroup) {
+        this.numberGroup = numberGroup;
     }
 }

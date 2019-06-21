@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
 import com.suai.sergey.databases.teacherDatabase.FioTeacher;
+import com.suai.sergey.databases.workDatabase.IdNameNumberMaxBallWork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +19,21 @@ import java.util.List;
 public class MarkSpinnerAdapter extends BaseAdapter {
 
     private final LayoutInflater layoutInflater;
-    private final List<FioTeacher> fioTeacher;
+    private final List<IdNameNumberMaxBallWork> works;
 
-    public MarkSpinnerAdapter(Context context, List<FioTeacher> fioTeacher) {
+    public MarkSpinnerAdapter(Context context, List<IdNameNumberMaxBallWork> works) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.fioTeacher = fioTeacher;
+        this.works = works;
     }
 
     @Override
     public int getCount() {//
-        return 0;
+        return works.size() + 1;
     }
 
     @Override
     public Object getItem(int position) {//
-        return null;
+        return works.get(position - 1);
     }
 
     @Override
@@ -45,8 +47,19 @@ public class MarkSpinnerAdapter extends BaseAdapter {
 
         List<String> marks = new ArrayList<>();
         marks.add("");
-        for (FioTeacher teachers : fioTeacher){
-            marks.add(String.valueOf(teachers.getFirstName()));
+//        for (IdNameNumberMaxBallWork work : works){
+//
+//            marks.add(String.valueOf(teachers.getFirstName()));
+//        }
+
+//        int maxMark = works.get(i).getMaxMarks();
+
+//        for (int i = 1; i < works.get(0).getMaxMarks(); i++) {
+//            marks.add(String.valueOf(i));
+//        }
+
+        for (int i = 1; i < FakeDataClass.INSTANCE.getIdNameNumberMaxBallWork().get(0).getMaxMarks(); i++){
+            marks.add(String.valueOf(i));
         }
 
         convertView = layoutInflater.inflate(R.layout.spinner_mark_item, parent, false);

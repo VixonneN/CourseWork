@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,14 +19,14 @@
         android:layout_width="140dp"
         android:layout_height="40dp"
         android:text="нахвание лабора"
-
+        android:layout_toRightOf="@id/item_numberWork"
         />
 
     <Spinner
         android:id="@+id/item_spinner_marks"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_toRightOf="@id/item_nameWork"
         />
 
     <Button
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сдать"
-        />
+        android:layout_toRightOf="@id/item_spinner_marks"/>
 
     <ImageView
         android:id="@+id/item_complete_work"
@@ -42,6 +42,7 @@
         android:layout_height="30dp"
         android:src="@drawable/check_bold"
         tools:ignore="ContentDescription"
+        android:layout_toRightOf="@id/item_nameWork"
         />
 
     <TextView
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:layout_toRightOf="@id/item_complete_work"
 
         />
 
@@ -58,6 +60,7 @@
         android:layout_height="30dp"
         android:src="@drawable/alpha_x_circle_outline"
         tools:ignore="ContentDescription"
+        android:layout_toRightOf="@id/item_mark"
         />
 
-</LinearLayout>
+</RelativeLayout>

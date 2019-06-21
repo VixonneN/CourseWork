@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -34,16 +35,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        deleteDataBase();
         fixDeliveryButton();
         freeDeliveryButton();
         networkResponse();
         teacherSpinner();
     }
 
+    //если добавить этот метод, то в выпадающем списке не будет данных
+    private void deleteDataBase() {
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllGroups();
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllStudents();
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllSubjects();
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllSubmissions();
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllTeachers();
+        AppDatabase.getAppDatabase(this).worksDao().deleteAllWorks();
+        Log.d("deleteAll", "удалена вся бд");
+    }
+
     private void teacherSpinner() {
         Spinner teacherSpinner = findViewById(R.id.teacher_spinner);
         TeacherSpinnerAdapter adapter = new TeacherSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getFioTeacher());
         teacherSpinner.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         teacherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -66,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<TeacherData>> call, @NonNull Response<List<TeacherData>> response) {
                 if (response.isSuccessful()) {
-                    List<TeacherData> data = response.body();
+                    final List<TeacherData> data = response.body();
                     assert data != null;
 
                     for (int i = 0; i < data.size(); i++) {
@@ -78,13 +92,14 @@ public class MainActivity extends AppCompatActivity {
                         Teacher teacher = createTeacher(id, firstName, secondName, lastName);
 
                         AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertTeacher(teacher);
+                        Log.d("добавить", "добавлен элемент");
                     }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<TeacherData>> call, @NonNull Throwable t) {
-                makeToast("Запрос завален1");
+                makeToast("Нет подключения к интернету");
             }
         });
     }

@@ -18,7 +18,7 @@ public class Student {
     private String firstName;
     private String secondName;
     private String lastName;
-    private int idGroup;
+    private String idGroup;
 
     public String getId() {
         return id;
@@ -48,10 +48,10 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public int getIdGroup() {
+    public String getIdGroup() {
         return idGroup;
     }
-    public void setIdGroup(int idGroup) {
+    public void setIdGroup(String idGroup) {
         this.idGroup = idGroup;
     }
 }

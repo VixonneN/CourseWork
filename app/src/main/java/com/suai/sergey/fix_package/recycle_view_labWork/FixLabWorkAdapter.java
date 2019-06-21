@@ -45,14 +45,28 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
         LabWorks labWork = labWorks.get(position);
         labWorkHolder.numberWork.setText(labWork.getNumberWork());
         labWorkHolder.nameWork.setText(labWork.getNameWork());
-        if (labWork.isMarks()){
+        if (labWork.isMarks()) {
+            //работа сдана, галочка, баллы, крестик
+
+            labWorkHolder.takeWorkButton.setVisibility(View.INVISIBLE);
+            labWorkHolder.spinnerMark.setVisibility(View.INVISIBLE);
+
             labWorkHolder.itemMark.setText(String.valueOf(labWork.getMark()));
             labWorkHolder.deleteMark.setOnClickListener(v -> {
                 context = labWorkHolder.deleteMark.getContext();
                 Toast.makeText(context, "321", Toast.LENGTH_SHORT).show();
                 Log.e("123", "123");
             });
-        } else {
+        } else {//работа не сдана, выпадающий список и кнопка
+
+            labWorkHolder.itemMark.setVisibility(View.INVISIBLE);
+            labWorkHolder.deleteMark.setVisibility(View.INVISIBLE);
+            labWorkHolder.completeWork.setVisibility(View.INVISIBLE);
+
+            context = labWorkHolder.spinnerMark.getContext();
+            MarkSpinnerAdapter spinnerAdapter = new MarkSpinnerAdapter(context, FakeDataClass.INSTANCE.getIdNameNumberMaxBallWork());
+            labWorkHolder.spinnerMark.setAdapter(spinnerAdapter);
+
             labWorkHolder.takeWorkButton.setOnClickListener(v -> {
                 //запрос на добавление в базу данных
                 //это работает, но не достать контекст
@@ -64,20 +78,20 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
         }
     }
 
-    private void addSpinnerAdapter(LabWorks labWork, @NonNull LabWorkHolder labWorkHolder){
-        context = labWorkHolder.spinnerMark.getContext();
-//        MarkSpinnerAdapter spinnerAdapter = new MarkSpinnerAdapter(this, );
+//    private void addSpinnerAdapter(LabWorks labWork, @NonNull LabWorkHolder labWorkHolder) {
+//        context = labWorkHolder.spinnerMark.getContext();
+//        MarkSpinnerAdapter spinnerAdapter = new MarkSpinnerAdapter(context, FakeDataClass.INSTANCE.getIdNameNumberMaxBallWork());
 //        labWorkHolder.spinnerMark.setAdapter(spinnerAdapter);
-
-    }
+//
+//    }
 
     //кнопка добавление записи в бд
-    public interface addDataToDataToDatabase{
+    public interface AddDataToDataToDatabase {
         void onItemClick();
     }
 
     //удаление данных из бд по кнопке
-    public interface deleteDataToDatabase{
+    public interface DeleteDataToDatabase {
         void onItemClick();
     }
 
@@ -96,16 +110,15 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
         final TextView itemMark;//true
         final ImageButton deleteMark;//true
 
-        LabWorkHolder(View itemView){
+        LabWorkHolder(View itemView) {
             super(itemView);
-                numberWork = itemView.findViewById(R.id.item_numberWork);
-                nameWork = itemView.findViewById(R.id.item_nameWork);
-                spinnerMark = itemView.findViewById(R.id.item_spinner_marks);
-                takeWorkButton = itemView.findViewById(R.id.item_buttonWork);
-                completeWork = itemView.findViewById(R.id.item_complete_work);
-                itemMark = itemView.findViewById(R.id.item_mark);
-                deleteMark = itemView.findViewById(R.id.item_delete_mark);
+            numberWork = itemView.findViewById(R.id.item_numberWork);
+            nameWork = itemView.findViewById(R.id.item_nameWork);
+            spinnerMark = itemView.findViewById(R.id.item_spinner_marks);
+            takeWorkButton = itemView.findViewById(R.id.item_buttonWork);
+            completeWork = itemView.findViewById(R.id.item_complete_work);
+            itemMark = itemView.findViewById(R.id.item_mark);
+            deleteMark = itemView.findViewById(R.id.item_delete_mark);
         }
     }
-
 }

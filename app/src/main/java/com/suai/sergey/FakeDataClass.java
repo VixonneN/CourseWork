@@ -1,9 +1,7 @@
 package com.suai.sergey;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
-import com.suai.sergey.databases.AppDatabase;
-import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
 import com.suai.sergey.databases.studentDatabase.Student;

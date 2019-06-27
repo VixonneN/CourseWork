@@ -1,8 +1,8 @@
 package com.suai.sergey;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +16,6 @@ import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.databases.teacherDatabase.FioTeacher;
 import com.suai.sergey.databases.teacherDatabase.Teacher;
 import com.suai.sergey.fix_package.FixDeliveryActivity;
-import com.suai.sergey.free_package.FreeDeliveryActivity;
 import com.suai.sergey.network.data_classes.TeacherData;
 
 import java.util.List;
@@ -62,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
-                    FioTeacher nb = (FioTeacher) parent.getItemAtPosition(position);
-                    idSpinner = String.valueOf(nb.getId());
+                    FioTeacher fioTeacher = (FioTeacher) parent.getItemAtPosition(position);
+                    idSpinner = String.valueOf(fioTeacher.getId());
                     isFlagTeacher = true;
                 }
             }
@@ -131,9 +130,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void freeDeliveryButton() {
-        final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
-        Button fixDelivery = findViewById(R.id.free_delivery);
-        fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
+//        final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
+//        Button fixDelivery = findViewById(R.id.free_delivery);
+//        fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
     }
 
     private void makeToast(String text) {

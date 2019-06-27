@@ -1,13 +1,10 @@
 package com.suai.sergey.databases.submissionDatabase;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-
-import com.suai.sergey.databases.workDatabase.Work;
-import com.suai.sergey.databases.studentDatabase.Student;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
 @Entity
 public class Submission {

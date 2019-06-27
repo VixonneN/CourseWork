@@ -1,6 +1,6 @@
 package com.suai.sergey.databases.studentDatabase;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class FioStudent {
     @ColumnInfo(name = "fio_student")

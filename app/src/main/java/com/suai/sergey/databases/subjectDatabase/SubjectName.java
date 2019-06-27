@@ -1,6 +1,6 @@
 package com.suai.sergey.databases.subjectDatabase;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class SubjectName {
     @ColumnInfo(name = "subject_name")

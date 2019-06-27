@@ -1,6 +1,6 @@
 package com.suai.sergey.databases.groupDatabase;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class NumberGroup {
 

@@ -1,6 +1,6 @@
 package com.suai.sergey.databases.workDatabase;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class NameWork {
 

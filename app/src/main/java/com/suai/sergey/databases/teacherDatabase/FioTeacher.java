@@ -1,6 +1,6 @@
 package com.suai.sergey.databases.teacherDatabase;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 public class FioTeacher {
     private String id;

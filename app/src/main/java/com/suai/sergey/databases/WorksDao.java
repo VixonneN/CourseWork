@@ -1,16 +1,12 @@
 package com.suai.sergey.databases;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
-import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
-import com.suai.sergey.databases.studentDatabase.FioStudent;
-import com.suai.sergey.databases.studentDatabase.Student;
-import com.suai.sergey.databases.subjectDatabase.Subject;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.teacherDatabase.FioTeacher;
 import com.suai.sergey.databases.teacherDatabase.Teacher;

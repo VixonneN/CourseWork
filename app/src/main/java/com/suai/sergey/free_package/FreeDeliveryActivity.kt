@@ -24,7 +24,7 @@ class FreeDeliveryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_free_delivery)
-        GroupSpinner()
+        groupSpinner()
         studentSpinner()
         subjectSpinner()
         labWorkSpinner()
@@ -51,7 +51,7 @@ class FreeDeliveryActivity : AppCompatActivity() {
     }
 
 
-    private fun GroupSpinner() {
+    private fun groupSpinner() {
         val groupSpinner = findViewById<Spinner>(R.id.sv1)
         val groupSpinnerAdapter = GroupSpinnerAdapter(this, FakeDataClass.INSTANCE.groupList)
         groupSpinner.adapter = groupSpinnerAdapter

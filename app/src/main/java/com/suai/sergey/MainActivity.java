@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String id, firstName, secondName, lastName, idSpinner;
     private boolean isFlagTeacher = false;
+    private TeacherSpinnerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void teacherSpinner() {
         Spinner teacherSpinner = findViewById(R.id.teacher_spinner);
-        TeacherSpinnerAdapter adapter = new TeacherSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getFioTeacher());
+        adapter = new TeacherSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getFioTeacher());
         teacherSpinner.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         teacherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

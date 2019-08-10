@@ -1,22 +1,19 @@
 package com.suai.sergey;
 
+import android.app.Activity;
 import android.content.Intent;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.suai.sergey.adapters.TeacherSpinnerAdapter;
 import com.suai.sergey.databases.AppDatabase;
-import com.suai.sergey.databases.teacherDatabase.FioTeacher;
-import com.suai.sergey.databases.teacherDatabase.Teacher;
-import com.suai.sergey.fix_package.FixDeliveryActivity;
-import com.suai.sergey.network.data_classes.TeacherData;
+import com.suai.sergey.databases.groupDatabase.Group;
+import com.suai.sergey.databases.studentDatabase.Student;
+import com.suai.sergey.fix_package.FixGroupAndSubjectActivity;
+import com.suai.sergey.network.data_classes.StudentsData;
 
 import java.util.List;
 
@@ -26,90 +23,65 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String id, firstName, secondName, lastName, idSpinner;
-    private boolean isFlagTeacher = false;
+    private String id, firstName, secondName, lastName, idGroup, numberGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        deleteDataBase();
         fixDeliveryButton();
         freeDeliveryButton();
         networkResponse();
-        teacherSpinner();
-    }
-
-    //если добавить этот метод, то в выпадающем списке не будет данных
-    private void deleteDataBase() {
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllGroups();
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllStudents();
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllSubjects();
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllSubmissions();
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllTeachers();
-        AppDatabase.getAppDatabase(this).worksDao().deleteAllWorks();
-        Log.d("deleteAll", "удалена вся бд");
-    }
-
-    private void teacherSpinner() {
-        Spinner teacherSpinner = findViewById(R.id.teacher_spinner);
-        TeacherSpinnerAdapter adapter = new TeacherSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getFioTeacher());
-        teacherSpinner.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        teacherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    FioTeacher fioTeacher = (FioTeacher) parent.getItemAtPosition(position);
-                    idSpinner = String.valueOf(fioTeacher.getId());
-                    isFlagTeacher = true;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void networkResponse() {
-        getApp().getApi().getTeachers().enqueue(new Callback<List<TeacherData>>() {
+        getApp().getApi().getStudents().enqueue(new Callback<List<StudentsData>>() {
             @Override
-            public void onResponse(@NonNull Call<List<TeacherData>> call, @NonNull Response<List<TeacherData>> response) {
-                if (response.isSuccessful()) {
-                    final List<TeacherData> data = response.body();
-                    assert data != null;
-
+            public void onResponse(Call<List<StudentsData>> call, Response<List<StudentsData>> response) {
+                List<StudentsData> data = response.body();
+                if (data != null) {
                     for (int i = 0; i < data.size(); i++) {
                         id = data.get(i).getId();
                         firstName = data.get(i).getFirstName();
                         secondName = data.get(i).getSecondName();
                         lastName = data.get(i).getLastName();
 
-                        Teacher teacher = createTeacher(id, firstName, secondName, lastName);
+                        idGroup = data.get(i).getGroupsData().getId();//
 
-                        AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertTeacher(teacher);
-                        Log.d("добавить", "добавлен элемент");
+                        numberGroup = data.get(i).getGroupsData().getNumber();
+
+                        Student student = createStudent(id, firstName, secondName, lastName, idGroup);
+                        AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertStudent(student);
+
+                        Group group = createGroup(idGroup, numberGroup);
+                        AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertGroup(group);
                     }
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<TeacherData>> call, @NonNull Throwable t) {
-                makeToast("Нет подключения к интернету");
+            public void onFailure(Call<List<StudentsData>> call, Throwable t) {
+                makeToast("fail");
             }
         });
     }
 
-    private Teacher createTeacher(String id, String firstName, String secondName, String lastName) {
-        Teacher teacher = new Teacher();
-        teacher.setId(id);
-        teacher.setFirstName(firstName);
-        teacher.setSecondName(secondName);
-        teacher.setLastName(lastName);
-        return teacher;
+    private Student createStudent(String id, String firstName, String secondName, String lastName, String idGroup) {
+        Student student = new Student();
+        student.setId(id);
+        student.setFirstName(firstName);
+        student.setSecondName(secondName);
+        student.setLastName(lastName);
+        student.setIdGroup(idGroup);
+        return student;
+    }
+
+    private Group createGroup(String id, String numberGroup){
+        Group group = new Group();
+        group.setId(id);
+        group.setNumberGroup(numberGroup);
+        return group;
     }
 
     @Override
@@ -121,18 +93,11 @@ public class MainActivity extends AppCompatActivity {
     private void fixDeliveryButton() {
         Button fixDelivery = findViewById(R.id.fix_delivery);
         fixDelivery.setOnClickListener(v -> {
-            if (isFlagTeacher) {
-                openFixDeliveryActivity();
-            } else {
-                makeToast("Выберите преподавателя");
-            }
+            openFixDeliveryActivity();
         });
     }
 
     private void freeDeliveryButton() {
-//        final Intent freeDeliveryIntent = new Intent(MainActivity.this, FreeDeliveryActivity.class);
-//        Button fixDelivery = findViewById(R.id.free_delivery);
-//        fixDelivery.setOnClickListener(v -> startActivity(freeDeliveryIntent));
     }
 
     private void makeToast(String text) {
@@ -144,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFixDeliveryActivity() {
-        FixDeliveryActivity.start(this, idSpinner);
+        FixGroupAndSubjectActivity.start(this);
+    }
+
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
     }
 }

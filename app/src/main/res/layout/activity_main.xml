@@ -6,26 +6,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_teacher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/teacher"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
-        />
-
-    <Spinner
-        android:id="@+id/teacher_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/tv_teacher">
-
-    </Spinner>
 
     <Button
         android:id="@+id/fix_delivery"

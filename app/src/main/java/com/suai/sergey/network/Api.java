@@ -1,20 +1,22 @@
 package com.suai.sergey.network;
 
-import com.suai.sergey.network.data_classes.TeacherData;
+import com.suai.sergey.network.data_classes.AuthBody;
+import com.suai.sergey.network.data_classes.StudentsData;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.POST;
 
 public interface Api {
 
-    String BASE_URL = "http://my-json-server.typicode.com/aksenoff/api-test/";
+    String BASE_URL = "http://10.242.166.120:8080/";
 
-    @GET("teachers")
-    Call<List<TeacherData>> getTeachers();
+    @GET("students")
+    Call<List<StudentsData>> getStudents();
 
-    @GET("teachers/{id}")
-    Call<TeacherData> getTeacher(@Path("id") String id);
+    @POST("auth")
+    Call<Void> getAuth(@Body AuthBody authBody);
 }

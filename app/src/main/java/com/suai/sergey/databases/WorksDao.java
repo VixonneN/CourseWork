@@ -2,11 +2,15 @@ package com.suai.sergey.databases;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
+import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.studentDatabase.Student;
 import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.teacherDatabase.FioTeacher;
 import com.suai.sergey.databases.teacherDatabase.Teacher;
@@ -17,24 +21,21 @@ import java.util.List;
 @Dao
 public interface WorksDao {
 
-    @Query("select name_work from work")
-    List<NameWork> getWorkName();
+    @Query("select * from `Group` order by number_group")
+    List<Group> getNumber();
 
-    @Query("select subject_name from subject")
-    List<SubjectName> getSubjectName();
-
-    @Query("select number_group from `Group`")
-    List<NumberGroup> getNumber();
+    @Query("select * from student where idGroup in (:idGroup) order by firstName, secondName, lastName")
+    List<Student> getStudentsByGroup(String idGroup);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertTeacher(Teacher... teachers);
+    void insertStudent(Student... students);
 
-    @Query("select id, first_name, last_name from teacher")
-    List<FioTeacher> getFioTeacher();
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertGroup(Group... groups);
+
+
 
     //deleteAll
-    @Query("delete from teacher")
-    void deleteAllTeachers();
     @Query("delete from `group`")
     void deleteAllGroups();
     @Query("delete from student")

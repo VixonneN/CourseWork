@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
+import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.groupDatabase.NumberGroup;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public class GroupSpinnerAdapter extends BaseAdapter {
 
 
     private final LayoutInflater layoutInflater;
-    private final List<NumberGroup> numberGroups;
+    private final List<Group> numberGroups;
 
-    public GroupSpinnerAdapter(Context context, List<NumberGroup> numberGroups) {
+    public GroupSpinnerAdapter(Context context, List<Group> numberGroups) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.numberGroups = numberGroups;
     }
@@ -46,8 +47,8 @@ public class GroupSpinnerAdapter extends BaseAdapter {
 
         List<String> groups = new ArrayList<>();
         groups.add(" ");
-        for (NumberGroup number : numberGroups) {
-            groups.add(String.valueOf(number.getNumber()));
+        for (Group number : numberGroups) {
+            groups.add(String.valueOf(number.getNumberGroup()));
         }
 
         convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);

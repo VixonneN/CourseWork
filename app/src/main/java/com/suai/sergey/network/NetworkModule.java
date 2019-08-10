@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.suai.sergey.auth.AuthInterceptor;
+import com.suai.sergey.network.data_classes.AuthResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +43,7 @@ public class NetworkModule {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(new AuthInterceptor())
                 .build();
     }
 
@@ -51,7 +54,7 @@ public class NetworkModule {
     private Retrofit provideRetrofit(OkHttpClient okHttpClient, Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
     }

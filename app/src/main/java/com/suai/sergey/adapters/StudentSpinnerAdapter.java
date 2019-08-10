@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.suai.sergey.R;
 import com.suai.sergey.databases.studentDatabase.FioStudent;
+import com.suai.sergey.databases.studentDatabase.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,9 @@ public class StudentSpinnerAdapter extends BaseAdapter {
 
 
     private final LayoutInflater layoutInflater;
-    private final List<FioStudent> studentList;
+    private final List<Student> studentList;
 
-    public StudentSpinnerAdapter(Context context, List<FioStudent> studentList) {
+    public StudentSpinnerAdapter(Context context, List<Student> studentList) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.studentList = studentList;
     }
@@ -46,8 +47,8 @@ public class StudentSpinnerAdapter extends BaseAdapter {
 
         List<String> stringFio = new ArrayList<>();
         stringFio.add(" ");
-        for (FioStudent students : studentList) {
-            stringFio.add(String.valueOf(students.getFio()));
+        for (Student students : studentList) {
+            stringFio.add((students.getFirstName() + " " +students.getSecondName() + " " + students.getLastName()));
         }
 
             convertView = layoutInflater.inflate(R.layout.spinner_item, parent, false);

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class FixStudentsActivity extends AppCompatActivity {
 
-    private String nameStudent;
+    private String nameStudent, idGroup;
     private TextView numberGroup;
     private TextView nameSubject;
 
@@ -34,6 +34,8 @@ public class FixStudentsActivity extends AppCompatActivity {
         numberGroup = findViewById(R.id.tv_labwork_group);
         nameSubject = findViewById(R.id.tv_discipline);
 
+
+
         getIntents();
         actionBar();
         addRecycleView();
@@ -42,7 +44,7 @@ public class FixStudentsActivity extends AppCompatActivity {
     private void getIntents(){
         String number = getIntent().getStringExtra("numberGroup");
         String name = getIntent().getStringExtra("nameSubject");
-
+        idGroup = getIntent().getStringExtra("idGroup");
         numberGroup.setText(number);
         nameSubject.setText(name);
     }
@@ -80,17 +82,21 @@ public class FixStudentsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static void start(Activity activity, String number, String name){
+    public static void start(Activity activity, String number, String name, String idGroup){
         Intent fixStudentIntent = new Intent(activity, FixStudentsActivity.class);
         fixStudentIntent.putExtra("numberGroup", number);
         fixStudentIntent.putExtra("nameSubject", name);
+        fixStudentIntent.putExtra("idGroup", idGroup);
         activity.startActivity(fixStudentIntent);
     }
 
+    //заменить студентов
     private List<StudentsData> writeDBStudents(){
         List<StudentsData> studentsDataList = new ArrayList<>();
-        for (int i = 0; i < FakeDataClass.INSTANCE.getStudentList().size(); i++){
-            studentsDataList.add(new StudentsData(i + 1, String.valueOf(FakeDataClass.INSTANCE.getStudentList().get(i).getFio())));
+        for (int i = 0; i < AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).size(); i++){
+            studentsDataList.add(new StudentsData(i + 1, (AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getFirstName()
+            + " " + AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getSecondName()
+            + " " + AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getLastName())));
         }
         return studentsDataList;
     }

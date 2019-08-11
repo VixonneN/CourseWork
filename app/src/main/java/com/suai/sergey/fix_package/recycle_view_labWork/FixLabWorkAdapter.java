@@ -76,23 +76,6 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
         }
     }
 
-//    private void addSpinnerAdapter(LabWorks labWork, @NonNull LabWorkHolder labWorkHolder) {
-//        context = labWorkHolder.spinnerMark.getContext();
-//        MarkSpinnerAdapter spinnerAdapter = new MarkSpinnerAdapter(context, FakeDataClass.INSTANCE.getIdNameNumberMaxBallWork());
-//        labWorkHolder.spinnerMark.setAdapter(spinnerAdapter);
-//
-//    }
-
-    //кнопка добавление записи в бд
-    public interface AddDataToDataToDatabase {
-        void onItemClick();
-    }
-
-    //удаление данных из бд по кнопке
-    public interface DeleteDataToDatabase {
-        void onItemClick();
-    }
-
     @Override
     public int getItemCount() {
         return labWorks.size();
@@ -102,11 +85,11 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
 
         final TextView numberWork;
         final TextView nameWork;
-        final Spinner spinnerMark;//false
-        final Button takeWorkButton;//false
-        final ImageView completeWork;//true
-        final TextView itemMark;//true
-        final ImageButton deleteMark;//true
+        final Spinner spinnerMark;
+        final Button takeWorkButton;
+        final ImageView completeWork;
+        final TextView itemMark;
+        final ImageButton deleteMark;
 
         LabWorkHolder(View itemView) {
             super(itemView);

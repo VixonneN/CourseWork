@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suai.sergey.FakeDataClass;
@@ -24,9 +25,10 @@ public class FixGroupAndSubjectActivity extends AppCompatActivity {
 
     private Spinner subjectSpinner, groupSpinner;
     private String nameSubject;
-    private String numberGroup, idSpinner, idGroup;
+    private String numberGroup, idGroup;
     private boolean isFlagGroup;
     private boolean isFlagSubject;
+    private TextView subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +37,12 @@ public class FixGroupAndSubjectActivity extends AppCompatActivity {
 
         subjectSpinner = findViewById(R.id.s2);
         groupSpinner = findViewById(R.id.group_MA);
+        subject = findViewById(R.id.tv_discipline);
 
-        getIntents();
         groupAdapterSpinner();
         subjectAdapterSpinner();
         deliveryButton();
         actionBar();
-    }
-
-    private void getIntents(){
-        idSpinner = getIntent().getStringExtra("idSpinner");
-        Toast.makeText(this, idSpinner, Toast.LENGTH_SHORT).show();
     }
 
     private void actionBar() {
@@ -75,13 +72,15 @@ public class FixGroupAndSubjectActivity extends AppCompatActivity {
                 if (position != 0) {
                     //флаг для перехода
                     isFlagGroup = true;
-                    Group ng = (Group) parent.getItemAtPosition(position);
-                    numberGroup = String.valueOf(ng.getNumberGroup());
-                    idGroup = (ng.getId());
+                    Group group = (Group) parent.getItemAtPosition(position);
+                    numberGroup = String.valueOf(group.getNumberGroup());
+                    idGroup = (group.getId());
                     subjectSpinner.setVisibility(View.VISIBLE);
+                    subject.setVisibility(View.VISIBLE);
                 } else {
                     isFlagGroup = false;
                     subjectSpinner.setVisibility(View.INVISIBLE);
+                    subject.setVisibility(View.INVISIBLE);
                 }
             }
 

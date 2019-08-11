@@ -1,4 +1,4 @@
-package com.suai.sergey.network.data_classes;
+package com.suai.sergey.network.data_classes.auth;
 
 public class AuthBody {
     private String username;

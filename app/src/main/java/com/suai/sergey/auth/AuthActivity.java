@@ -2,10 +2,8 @@ package com.suai.sergey.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,8 +12,7 @@ import com.suai.sergey.App;
 import com.suai.sergey.MainActivity;
 import com.suai.sergey.R;
 import com.suai.sergey.databases.AppDatabase;
-import com.suai.sergey.network.data_classes.AuthBody;
-import com.suai.sergey.network.data_classes.AuthResponse;
+import com.suai.sergey.network.data_classes.auth.AuthBody;
 import com.suai.sergey.storage.PreferencesProvider;
 
 import retrofit2.Call;
@@ -27,9 +24,6 @@ public class AuthActivity extends AppCompatActivity {
     private Button authButton;
     private EditText etLogin;
     private EditText etPassword;
-    private String login;
-    private String password;
-    private String myToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +41,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void authButton(){
-        authButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getToken();
-            }
-        });
+        authButton.setOnClickListener(v -> getToken());
     }
 
     //если добавить этот метод, то в выпадающем списке не будет данных
@@ -67,8 +56,8 @@ public class AuthActivity extends AppCompatActivity {
 
 
     private void getToken(){
-        login = etLogin.getText().toString();
-        password = etPassword.getText().toString();
+        String login = etLogin.getText().toString();
+        String password = etPassword.getText().toString();
 
         AuthBody authBody = new AuthBody();
         authBody.setUsername(login);
@@ -81,6 +70,7 @@ public class AuthActivity extends AppCompatActivity {
                 String token = response.headers().get("Authorization");
                 if (token != null) {
                     PreferencesProvider.getPreferences().saveToken(token);
+                    Log.d("onResponse:" , token);
                     makeToast(token);
 
                     openMainActivity();
@@ -90,7 +80,7 @@ public class AuthActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("onFailure", "fail");
+                Log.d("onFailure", t.getMessage());
             }
         });
     }

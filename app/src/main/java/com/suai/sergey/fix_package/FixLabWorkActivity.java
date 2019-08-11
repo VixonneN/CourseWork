@@ -21,8 +21,6 @@ import java.util.List;
 public class FixLabWorkActivity extends AppCompatActivity {
 
     private TextView numberGroup, nameSubject, fioStudent;
-    private String number, name, fio;
-    private FixLabWorkAdapter labWorkAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,6 @@ public class FixLabWorkActivity extends AppCompatActivity {
         getIntents();
         actionBar();
         addRecycleView();
-
     }
 
     private void actionBar(){
@@ -47,9 +44,9 @@ public class FixLabWorkActivity extends AppCompatActivity {
     }
 
     private void getIntents(){
-        number = getIntent().getStringExtra("numberGroup");
-        name = getIntent().getStringExtra("nameSubject");
-        fio = getIntent().getStringExtra("nameStudent");
+        String number = getIntent().getStringExtra("numberGroup");
+        String name = getIntent().getStringExtra("nameSubject");
+        String fio = getIntent().getStringExtra("nameStudent");
 
         numberGroup.setText(number);
         nameSubject.setText(name);
@@ -72,17 +69,6 @@ public class FixLabWorkActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    private List<LabWorks> generateLabWork() {
-//        List<LabWorks> labWorksList = new ArrayList<>();
-//        String works = String.valueOf(nameWork.getName());//npe
-//        for (int i = 0; i < FakeDataClass.INSTANCE.getWorkList().size(); i++){
-//            labWorksList.add(new LabWorks(FakeDataClass.INSTANCE.getWorkList().get(i).getNumber());
-//        }
-//        String numberWorks = String.valueOf(numberWork.getNumber());//npe
-//        labWorksList.add(new LabWorks(numberWorks, works, 3, true));
-//        return labWorksList;
-//    }
 
     private List<LabWorks> generateLabWork(){
         List<LabWorks> labWorksList = new ArrayList<>();

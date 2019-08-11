@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         secondName = data.get(i).getSecondName();
                         lastName = data.get(i).getLastName();
 
-                        idGroup = data.get(i).getGroupsData().getId();//
-
+                        idGroup = data.get(i).getGroupsData().getId();
                         numberGroup = data.get(i).getGroupsData().getNumber();
 
                         Student student = createStudent(id, firstName, secondName, lastName, idGroup);
@@ -65,7 +64,20 @@ public class MainActivity extends AppCompatActivity {
                 makeToast("fail");
             }
         });
-    }
+    }//    @Query("select number_work from work")
+//    List<NumberGroup> getNumberGroup();
+
+//    //добавление данных в бд списком
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertGroup(Group... groups);
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertStudent(List<FioStudent> students);
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertSubject(Subject... subjects);
+//
+
 
     private Student createStudent(String id, String firstName, String secondName, String lastName, String idGroup) {
         Student student = new Student();
@@ -92,15 +104,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void fixDeliveryButton() {
         Button fixDelivery = findViewById(R.id.fix_delivery);
-        fixDelivery.setOnClickListener(v -> {
-            openFixDeliveryActivity();
-        });
+        fixDelivery.setOnClickListener(v -> openFixDeliveryActivity());
     }
 
     private void freeDeliveryButton() {
     }
 
-    private void makeToast(String text) {
+    private void makeToast(@SuppressWarnings("SameParameterValue") String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 

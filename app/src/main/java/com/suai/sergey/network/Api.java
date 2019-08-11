@@ -1,6 +1,6 @@
 package com.suai.sergey.network;
 
-import com.suai.sergey.network.data_classes.AuthBody;
+import com.suai.sergey.network.data_classes.auth.AuthBody;
 import com.suai.sergey.network.data_classes.StudentsData;
 
 import java.util.List;

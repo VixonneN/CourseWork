@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
-import com.suai.sergey.databases.teacherDatabase.FioTeacher;
 import com.suai.sergey.databases.workDatabase.IdNameNumberMaxBallWork;
 
 import java.util.ArrayList;
@@ -47,16 +46,6 @@ public class MarkSpinnerAdapter extends BaseAdapter {
 
         List<String> marks = new ArrayList<>();
         marks.add("");
-//        for (IdNameNumberMaxBallWork work : works){
-//
-//            marks.add(String.valueOf(teachers.getFirstName()));
-//        }
-
-//        int maxMark = works.get(i).getMaxMarks();
-
-//        for (int i = 1; i < works.get(0).getMaxMarks(); i++) {
-//            marks.add(String.valueOf(i));
-//        }
 
         for (int i = 1; i < FakeDataClass.INSTANCE.getIdNameNumberMaxBallWork().get(0).getMaxMarks(); i++){
             marks.add(String.valueOf(i));

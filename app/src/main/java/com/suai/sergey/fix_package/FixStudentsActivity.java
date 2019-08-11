@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
 import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.fix_package.recycle_view_students.FixStudentAdapter;
@@ -33,8 +32,6 @@ public class FixStudentsActivity extends AppCompatActivity {
 
         numberGroup = findViewById(R.id.tv_labwork_group);
         nameSubject = findViewById(R.id.tv_discipline);
-
-
 
         getIntents();
         actionBar();
@@ -99,10 +96,6 @@ public class FixStudentsActivity extends AppCompatActivity {
             + " " + AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getLastName())));
         }
         return studentsDataList;
-    }
-
-    private void makeToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override

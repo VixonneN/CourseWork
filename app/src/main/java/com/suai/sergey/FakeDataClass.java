@@ -1,8 +1,5 @@
 package com.suai.sergey;
 
-import androidx.annotation.NonNull;
-
-import com.suai.sergey.databases.subjectDatabase.SubjectName;
 import com.suai.sergey.databases.workDatabase.IdNameNumberMaxBallWork;
 
 import java.util.ArrayList;
@@ -10,13 +7,6 @@ import java.util.List;
 
 public enum FakeDataClass {
     INSTANCE;
-
-    @NonNull
-    public SubjectName createSubject(String name) {
-        SubjectName subject = new SubjectName();
-        subject.setName(name);
-        return subject;
-    }
 
     public IdNameNumberMaxBallWork createWork(String id, String name, int number, int maxBall) {
         IdNameNumberMaxBallWork idNameNumberMaxBallWork = new IdNameNumberMaxBallWork();
@@ -38,13 +28,4 @@ public enum FakeDataClass {
         return workList;
     }
 
-    public List<SubjectName> getSubjectList() {
-        List<SubjectName> subjectList = new ArrayList<>();
-        subjectList.add(createSubject("Основы программирования"));
-        subjectList.add(createSubject("Физика"));
-        subjectList.add(createSubject("Электротехника"));
-        subjectList.add(createSubject("Социология"));
-        subjectList.add(createSubject("English language"));
-        return subjectList;
-    }
 }

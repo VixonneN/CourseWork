@@ -7,6 +7,7 @@ import androidx.room.Query;
 
 import com.suai.sergey.databases.groupDatabase.Group;
 import com.suai.sergey.databases.studentDatabase.Student;
+import com.suai.sergey.databases.subjectDatabase.Subject;
 
 import java.util.List;
 
@@ -25,7 +26,10 @@ public interface WorksDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertGroup(Group... groups);
 
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertSubject(Subject... subjects);
+    @Query("select * from subject order by subject_name")
+    List<Subject> getAllSubject();
 
     //deleteAll
     @Query("delete from `group`")

@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suai.sergey.App;
@@ -19,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
 
     private Button authButton;
     private EditText etLogin;
@@ -30,14 +33,15 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
+        String getToken = PreferencesProvider.getPreferences().getSavedToken();
+        Log.d("getToken", getToken);
+
         etLogin = findViewById(R.id.et_login);
         etPassword = findViewById(R.id.et_password);
-
         authButton = findViewById(R.id.auth_button);
 
         deleteDataBase();
         authButton();
-
     }
 
     private void authButton(){
@@ -53,7 +57,6 @@ public class AuthActivity extends AppCompatActivity {
         AppDatabase.getAppDatabase(this).worksDao().deleteAllWorks();
         Log.d("deleteAll", "удалена вся бд");
     }
-
 
     private void getToken(){
         String login = etLogin.getText().toString();
@@ -81,6 +84,7 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("onFailure", t.getMessage());
+                makeToast(t.getMessage());
             }
         });
     }
@@ -98,4 +102,15 @@ public class AuthActivity extends AppCompatActivity {
         MainActivity.start(this);
     }
 
+    //хз тут
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            getToken();
+            // обрабатываем нажатие кнопки GO
+            return true;
+        }
+
+        return false;
+    }
 }

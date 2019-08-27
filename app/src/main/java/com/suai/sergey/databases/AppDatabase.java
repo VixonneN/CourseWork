@@ -3,6 +3,7 @@ package com.suai.sergey.databases;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
 import android.content.Context;
 
 import com.suai.sergey.databases.groupDatabase.Group;
@@ -38,7 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    public static void destroyInstance(){
+    public static void destroyInstance() {
         INSTANCE = null;
     }
 }

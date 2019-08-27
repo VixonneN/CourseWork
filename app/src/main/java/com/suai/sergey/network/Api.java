@@ -1,5 +1,6 @@
 package com.suai.sergey.network;
 
+import com.suai.sergey.network.data_classes.SubjectData;
 import com.suai.sergey.network.data_classes.auth.AuthBody;
 import com.suai.sergey.network.data_classes.StudentsData;
 
@@ -19,4 +20,7 @@ public interface Api {
 
     @POST("auth")
     Call<Void> getAuth(@Body AuthBody authBody);
+
+    @GET("subjects")
+    Call<List<SubjectData>> getAllSubjects();
 }

@@ -10,7 +10,8 @@
         android:id="@+id/item_numberWork"
         android:layout_width="30dp"
         android:layout_height="40dp"
-        android:text="123"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
 
         />
 
@@ -18,23 +19,33 @@
         android:id="@+id/item_nameWork"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:text="нахвание лабора"
-        android:layout_toRightOf="@id/item_numberWork"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        android:ellipsize="end"
+        android:layout_toEndOf="@id/item_numberWork"
         />
 
     <Spinner
         android:id="@+id/item_spinner_marks"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/item_nameWork"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:visibility="invisible"
+        android:layout_toEndOf="@id/item_nameWork"
         />
 
     <Button
         android:id="@+id/item_buttonWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Сдать"
-        android:layout_toRightOf="@id/item_spinner_marks"/>
+        android:text="@string/getWork"
+        android:layout_marginEnd="25dp"
+        android:visibility="invisible"
+        android:layout_toEndOf="@id/item_spinner_marks"
+        />
 
     <ImageView
         android:id="@+id/item_complete_work"
@@ -42,7 +53,9 @@
         android:layout_height="30dp"
         android:src="@drawable/check_bold"
         tools:ignore="ContentDescription"
-        android:layout_toRightOf="@id/item_nameWork"
+        android:visibility="visible"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@id/item_nameWork"
         />
 
     <TextView
@@ -50,7 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:layout_toRightOf="@id/item_complete_work"
+        android:textColor="@color/colorBlack"
+        android:layout_marginStart="25dp"
+        android:text="15"
+        android:visibility="visible"
+        android:layout_toEndOf="@id/item_complete_work"
 
         />
 
@@ -58,9 +75,12 @@
         android:id="@+id/item_delete_mark"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_alignEnd="@+id/item_spinner_marks"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@id/item_mark"
         android:src="@drawable/alpha_x_circle_outline"
-        tools:ignore="ContentDescription"
-        android:layout_toRightOf="@id/item_mark"
-        />
+        android:visibility="visible"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>

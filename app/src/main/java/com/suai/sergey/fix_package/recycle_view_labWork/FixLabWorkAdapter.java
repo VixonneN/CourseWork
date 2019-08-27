@@ -67,7 +67,6 @@ public class FixLabWorkAdapter extends RecyclerView.Adapter<FixLabWorkAdapter.La
 
             labWorkHolder.takeWorkButton.setOnClickListener(v -> {
                 //запрос на добавление в базу данных
-                //это работает, но не достать контекст
                 context = labWorkHolder.takeWorkButton.getContext();
                 Toast.makeText(context, "123", Toast.LENGTH_SHORT).show();
                 Log.d("321", "1233333");

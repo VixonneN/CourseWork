@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.suai.sergey.R;
-import com.suai.sergey.databases.subjectDatabase.SubjectName;
+import com.suai.sergey.databases.subjectDatabase.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class SubjectSpinnerAdapter extends BaseAdapter {
 
 
     private final LayoutInflater layoutInflater;
-    private final List<SubjectName> subjectNames;
+    private final List<Subject> subjectNames;
 
-    public SubjectSpinnerAdapter(Context context, List<SubjectName> subjectNames) {
+    public SubjectSpinnerAdapter(Context context, List<Subject> subjectNames) {
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.subjectNames = subjectNames;
     }
@@ -46,7 +46,7 @@ public class SubjectSpinnerAdapter extends BaseAdapter {
 
         List<String> subjectList = new ArrayList<>();
         subjectList.add(" ");
-        for (SubjectName subjectName : subjectNames) {
+        for (Subject subjectName : subjectNames) {
             subjectList.add(String.valueOf(subjectName.getName()));
         }
 

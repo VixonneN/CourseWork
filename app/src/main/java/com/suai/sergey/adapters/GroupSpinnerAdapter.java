@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.suai.sergey.R;
 import com.suai.sergey.databases.groupDatabase.Group;
-import com.suai.sergey.databases.groupDatabase.NumberGroup;
 
 import java.util.ArrayList;
 import java.util.List;

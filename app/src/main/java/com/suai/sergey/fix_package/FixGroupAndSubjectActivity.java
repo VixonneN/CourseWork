@@ -13,13 +13,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.suai.sergey.FakeDataClass;
 import com.suai.sergey.R;
 import com.suai.sergey.adapters.GroupSpinnerAdapter;
 import com.suai.sergey.adapters.SubjectSpinnerAdapter;
 import com.suai.sergey.databases.AppDatabase;
 import com.suai.sergey.databases.groupDatabase.Group;
-import com.suai.sergey.databases.subjectDatabase.SubjectName;
+import com.suai.sergey.databases.subjectDatabase.Subject;
 
 public class FixGroupAndSubjectActivity extends AppCompatActivity {
 
@@ -92,7 +91,7 @@ public class FixGroupAndSubjectActivity extends AppCompatActivity {
     }
 
     private void subjectAdapterSpinner() {
-        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, FakeDataClass.INSTANCE.getSubjectList());
+        SubjectSpinnerAdapter spinnerAdapter = new SubjectSpinnerAdapter(this, AppDatabase.getAppDatabase(this).worksDao().getAllSubject());
         subjectSpinner.setAdapter(spinnerAdapter);
 
         subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -100,7 +99,7 @@ public class FixGroupAndSubjectActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     isFlagSubject = true;
-                    SubjectName subject = (SubjectName) parent.getItemAtPosition(position);
+                    Subject subject = (Subject) parent.getItemAtPosition(position);
                     nameSubject = String.valueOf(subject.getName());
                 } else {
                     isFlagSubject = false;

@@ -6,7 +6,9 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suai.sergey.databases.AppDatabase;
@@ -27,11 +29,19 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private String idStudent, firstName, secondName, lastName, idGroup, numberGroup, idSubject, nameSubject, typeSubject;
+    private TextView studentStatusDownload, groupStatusDownload, subjuctStatusDownload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        studentStatusDownload = findViewById(R.id.student_download);
+        studentStatusDownload.setVisibility(View.INVISIBLE);
+        groupStatusDownload = findViewById(R.id.group_download);
+        groupStatusDownload.setVisibility(View.INVISIBLE);
+        subjuctStatusDownload = findViewById(R.id.subject_download);
+        subjuctStatusDownload.setVisibility(View.INVISIBLE);
 
         fixDeliveryButton();
         freeDeliveryButton();
@@ -58,7 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
                         Group group = createGroup(idGroup, numberGroup);
                         AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertGroup(group);
+
                     }
+
+                    studentStatusDownload.setVisibility(View.VISIBLE);
+                    groupStatusDownload.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -81,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
                         Subject subject = createSubject(idSubject, nameSubject, typeSubject);
                         AppDatabase.getAppDatabase(MainActivity.this).worksDao().insertSubject(subject);
                     }
+
+                    subjuctStatusDownload.setVisibility(View.VISIBLE);
                 }
             }
 

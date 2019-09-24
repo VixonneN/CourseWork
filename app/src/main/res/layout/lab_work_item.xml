@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:visibility="invisible"
         android:layout_toEndOf="@id/item_nameWork"
         />
 
@@ -43,7 +42,6 @@
         android:layout_height="wrap_content"
         android:text="@string/getWork"
         android:layout_marginEnd="25dp"
-        android:visibility="invisible"
         android:layout_toEndOf="@id/item_spinner_marks"
         />
 
@@ -75,8 +73,6 @@
         android:id="@+id/item_delete_mark"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignEnd="@+id/item_spinner_marks"
-        android:layout_marginEnd="10dp"
         android:layout_marginStart="25dp"
         android:layout_toEndOf="@id/item_mark"
         android:src="@drawable/alpha_x_circle_outline"

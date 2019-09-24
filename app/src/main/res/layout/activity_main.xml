@@ -6,6 +6,28 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/student_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Студенты добавлены в базу"
+        />
+
+    <TextView
+        android:id="@+id/group_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Группы добавлены в базу"
+        android:layout_below="@id/student_download"
+        />
+
+    <TextView
+        android:id="@+id/subject_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Предметы добавлены в базу"
+        android:layout_below="@id/group_download"
+        />
 
     <Button
         android:id="@+id/fix_delivery"

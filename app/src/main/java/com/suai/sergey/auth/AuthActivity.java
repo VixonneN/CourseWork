@@ -74,7 +74,6 @@ public class AuthActivity extends AppCompatActivity implements TextView.OnEditor
                 if (token != null) {
                     PreferencesProvider.getPreferences().saveToken(token);
                     Log.d("onResponse:" , token);
-                    makeToast(token);
 
                     openMainActivity();
                 }

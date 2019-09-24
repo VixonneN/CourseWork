@@ -28,6 +28,7 @@ public interface WorksDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSubject(Subject... subjects);
+
     @Query("select * from subject order by subject_name")
     List<Subject> getAllSubject();
 

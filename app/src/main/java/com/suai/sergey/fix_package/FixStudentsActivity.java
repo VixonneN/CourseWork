@@ -89,11 +89,13 @@ public class FixStudentsActivity extends AppCompatActivity {
 
     //заменить студентов
     private List<StudentsData> writeDBStudents(){
+        int i = 0;
+        String firstName = AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getFirstName();
+        String secondName = AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getSecondName();
+        String lastName = AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getLastName();
         List<StudentsData> studentsDataList = new ArrayList<>();
-        for (int i = 0; i < AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).size(); i++){
-            studentsDataList.add(new StudentsData(i + 1, (AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getFirstName()
-            + " " + AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getSecondName()
-            + " " + AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).get(i).getLastName())));
+        for (i = 0; i < AppDatabase.getAppDatabase(this).worksDao().getStudentsByGroup(idGroup).size(); i++){
+            studentsDataList.add(new StudentsData(i + 1, (firstName + " " + secondName + " " + lastName)));
         }
         return studentsDataList;
     }
